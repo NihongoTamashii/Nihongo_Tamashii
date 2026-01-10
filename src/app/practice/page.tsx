@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { useFormState } from 'react-dom';
+import { useState, useEffect, useRef, useMemo, useActionState } from 'react';
 import * as wanakana from 'wanakana';
 import { vocabularyList, type VocabularyItem } from '@/lib/vocabulary';
 import { JapaneseKeyboard } from '@/components/japanese-keyboard';
@@ -37,7 +36,7 @@ function getRandomItem(
 const staticCharacterSet = ['r', 'm', 't', 'p', 'e', 'c', 'n', 'h', 'z', 'd', 'a', 'u'];
 
 export default function PracticePage() {
-  const [state, formAction] = useFormState(checkAnswer, initialState);
+  const [state, formAction] = useActionState(checkAnswer, initialState);
   const [currentWord, setCurrentWord] = useState<VocabularyItem | null>(null);
   const [romajiInput, setRomajiInput] = useState('');
   const [characterSet, setCharacterSet] = useState<string[]>([]);
