@@ -49,9 +49,19 @@ export async function checkAnswer(
     ? wanakana.toKatakana(rawUserAnswer, { passRomaji: true })
     : wanakana.toHiragana(rawUserAnswer, { passRomaji: true });
 
+  // Handle special characters like `～`
+  const cleanExpectedAnswer = expectedAnswer.startsWith('～')
+    ? expectedAnswer.substring(1)
+    : expectedAnswer;
+  const cleanExpectedAnswerKanji = expectedAnswerKanji.startsWith('～')
+    ? expectedAnswerKanji.substring(1)
+    : expectedAnswerKanji;
+
   // Check against hiragana/katakana reading and kanji
   const isCorrect =
+    userAnswer === cleanExpectedAnswer ||
     userAnswer === expectedAnswer ||
+    (cleanExpectedAnswerKanji && userAnswer === cleanExpectedAnswerKanji) ||
     (expectedAnswerKanji && userAnswer === expectedAnswerKanji);
 
   if (isCorrect) {
