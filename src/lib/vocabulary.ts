@@ -51,35 +51,61 @@ const chapter1Words: VocabularyItem[] = [
   { id: 38, reading: 'フランス', japanese: 'フランス', meaning: 'Perancis' },
 ];
 
-const otherWords: VocabularyItem[] = [
-  { id: 39, japanese: '学ぶ', reading: 'まなぶ', meaning: 'Belajar' },
-  { id: 40, japanese: '学校', reading: 'がっこう', meaning: 'Sekolah' },
-  { id: 41, japanese: 'おはよう', reading: 'おはよう', meaning: 'Selamat pagi' },
-  { id: 42, japanese: 'こんにちは', reading: 'こんにちは', meaning: 'Selamat siang' },
-  { id: 43, japanese: 'こんばんは', reading: 'こんばんは', meaning: 'Selamat malam' },
-  { id: 44, japanese: 'ありがとう', reading: 'ありがとう', meaning: 'Terima kasih' },
-  { id: 45, japanese: 'すみません', reading: 'すみません', meaning: 'Maaf / Permisi' },
-  { id: 46, japanese: '食べる', reading: 'たべる', meaning: 'Makan' },
-  { id: 47, japanese: '飲む', reading: 'のむ', meaning: 'Minum' },
-  { id: 48, japanese: '見る', reading: 'みる', meaning: 'Melihat' },
-  { id: 49, japanese: '行く', reading: 'いく', meaning: 'Pergi' },
-  { id: 50, japanese: '来る', reading: 'くる', meaning: 'Datang' },
-  { id: 51, japanese: '友達', reading: 'ともだち', meaning: 'Teman' },
-  { id: 52, japanese: '時間', reading: 'じかん', meaning: 'Waktu' },
-  { id: 53, japanese: '今日', reading: 'きょう', meaning: 'Hari ini' },
-  { id: 54, japanese: '明日', reading: 'あした', meaning: 'Besok' },
+const chapter2Words: VocabularyItem[] = [
+  { id: 39, reading: "これ", japanese: "これ", meaning: "Ini" },
+  { id: 40, reading: "それ", japanese: "それ", meaning: "Itu (dekat)" },
+  { id: 41, reading: "あれ", japanese: "あれ", meaning: "Itu (jauh)" },
+  { id: 42, reading: "この～", japanese: "この～", meaning: "～ini" },
+  { id: 43, reading: "その～", japanese: "その～", meaning: "～itu (dekat)" },
+  { id: 44, reading: "あの～", japanese: "あの～", meaning: "～itu (jauh)" },
+  { id: 45, reading: "ほん", japanese: "本", meaning: "Buku" },
+  { id: 46, reading: "じしょ", japanese: "辞書", meaning: "Kamus" },
+  { id: 47, reading: "ざっし", japanese: "雑誌", meaning: "Majalah" },
+  { id: 48, reading: "しんぶん", japanese: "新聞", meaning: "Koran" },
+  { id: 49, reading: "ノート", japanese: "ノート", meaning: "Buku catatan" },
+  { id: 50, reading: "てちょう", japanese: "手帳", meaning: "Buku agenda" },
+  { id: 51, reading: "めいし", japanese: "名刺", meaning: "Kartu nama" },
+  { id: 52, reading: "カード", japanese: "カード", meaning: "Kartu" },
+  { id: 53, reading: "えんぴつ", japanese: "鉛筆", meaning: "Pensil" },
+  { id: 54, reading: "ボールペン", japanese: "ボールペン", meaning: "Bolpoin" },
+  { id: 55, reading: "シャープペンシル", japanese: "シャープペンシル", meaning: "Pensil mekanik" },
+  { id: 56, reading: "かぎ", japanese: "鍵", meaning: "Kunci" },
+  { id: 57, reading: "とけい", japanese: "時計", meaning: "Jam , arloji" },
+  { id: 58, reading: "かさ", japanese: "傘", meaning: "Payung" },
+  { id: 59, reading: "かばん", japanese: "鞄", meaning: "Tas" },
+  { id: 60, reading: "テレビ", japanese: "テレビ", meaning: "Televisi" },
+  { id: 61, reading: "ラジオ", japanese: "ラジオ", meaning: "Radio" },
+  { id: 62, reading: "カメラ", japanese: "カメラ", meaning: "Kamera" },
+  { id: 63, reading: "コンピューター", japanese: "コンピューター", meaning: "Komputer" },
+  { id: 64, reading: "くるま", japanese: "車", meaning: "Mobil" },
+  { id: 65, reading: "つくえ", japanese: "机", meaning: "Meja" },
+  { id: 66, reading: "いす", japanese: "椅子", meaning: "Kursi" },
+  { id: 67, reading: "チョコレート", japanese: "チョコレート", meaning: "Coklat" },
+  { id: 68, reading: "コーヒー", japanese: "コーヒー", meaning: "Kopi" },
+  { id: 69, reading: "おみやげ", japanese: "お土産", meaning: "Oleh-oleh" },
+  { id: 70, reading: "えいご", japanese: "英語", meaning: "Bahasa inggris" },
+  { id: 71, reading: "にほんご", japanese: "日本語", meaning: "Bahasa jepang" },
+  { id: 72, reading: "～ご", japanese: "～語", meaning: "Bahasa ～" },
+  { id: 73, reading: "なん", japanese: "何", meaning: "Apa" },
+  { id: 74, reading: "そう", japanese: "そう", meaning: "Begitu" },
+  { id: 75, reading: "あのう", japanese: "あのう", meaning: "Eee ...(ungkapan ketika ragu)" },
+  { id: 76, reading: "えっ", japanese: "えっ", meaning: "Eh (diucapkan ketika mendengar sesuatu diluar dugaan)" },
+  { id: 77, reading: "どうぞ", japanese: "どうぞ", meaning: "Silakan" },
+  { id: 78, reading: "どうもありがとうございます", japanese: "どうもありがとうございます", meaning: "Terima kasih" },
+  { id: 79, reading: "そうですか", japanese: "そうですか", meaning: "O,begitu, benarkah?" },
+  { id: 80, reading: "ちがいます", japanese: "違います", meaning: "Bukan , Tidak , Salah" },
+  { id: 81, reading: "あ", japanese: "あ", meaning: "O,eh (dipakai ketika sadar)" },
+  { id: 82, reading: "これからおせわになります", japanese: "これからお世話になります", meaning: "Mulai sekarang saya akan meminta bantuannya" },
+  { id: 83, reading: "こちらこそよろしくおねがいします", japanese: "こちらこそよろしくおねがいします", meaning: "Ya sama-sama" },
 ];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...otherWords];
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
   let words: VocabularyItem[] = [];
   if (chapterNumber === 1) words = chapter1Words;
-  if (chapterNumber === 2) words = otherWords.slice(0, 4);
-  if (chapterNumber === 3) words = otherWords.slice(4, 8);
-  if (chapterNumber === 4) words = otherWords.slice(8, 12);
-  if (chapterNumber === 5) words = otherWords.slice(12, 16);
+  if (chapterNumber === 2) words = chapter2Words;
 
   return {
     chapter: chapterNumber,
