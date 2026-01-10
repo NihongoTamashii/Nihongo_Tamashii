@@ -46,7 +46,7 @@ export async function checkAnswer(
     const { userAnswer: rawUserAnswer, expectedAnswer, expectedAnswerKanji } = validatedFields.data;
 
     const isKatakanaExpected = wanakana.isKatakana(expectedAnswer);
-    const userAnswer = isKatakanaExpected ? wanakana.toKatakana(rawUserAnswer) : wanakana.toHiragana(rawUserAnswer);
+    const userAnswer = isKatakanaExpected ? wanakana.toKatakana(rawUserAnswer, { passRomaji: true }) : wanakana.toHiragana(rawUserAnswer, { passRomaji: true });
 
     // Check against hiragana/katakana reading and kanji
     const isCorrect = userAnswer === expectedAnswer || (expectedAnswerKanji && userAnswer === expectedAnswerKanji);
@@ -82,7 +82,6 @@ export async function checkAnswer(
     }
 
   } catch (error) {
-    console.error('Error validating answer:', error);
     return {
       isValid: null,
       feedback: 'Terjadi kesalahan saat memeriksa jawaban. Silakan coba lagi.',
