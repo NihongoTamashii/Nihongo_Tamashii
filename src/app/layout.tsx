@@ -5,7 +5,7 @@ import { SiteHeader } from '@/components/site-header';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Kotoba Drill',
+  title: 'Nihongo Tamashii',
   description: 'A simple app to learn Japanese vocabulary.',
 };
 

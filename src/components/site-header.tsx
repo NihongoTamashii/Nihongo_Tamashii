@@ -31,7 +31,7 @@ export function SiteHeader() {
               href="/"
               className="text-2xl font-headline font-bold text-primary"
             >
-              Kotoba Drill
+              Nihongo Tamashii
             </Link>
           </div>
           <nav className="hidden md:flex md:space-x-8">

@@ -22,7 +22,7 @@ export default function Home() {
     <div className="flex flex-col items-center gap-8 pt-10">
       <div className="text-center">
         <h1 className="text-4xl font-headline font-bold tracking-tight lg:text-5xl">
-          Selamat Datang di Kotoba Drill
+          Selamat Datang di Nihongo Tamashii
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
           Pilih mode belajar untuk memulai.
