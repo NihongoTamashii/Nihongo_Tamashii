@@ -43,9 +43,12 @@ export async function checkAnswer(
         }
     }
 
-    const { userAnswer, expectedAnswer, expectedAnswerKanji } = validatedFields.data;
+    const { userAnswer: rawUserAnswer, expectedAnswer, expectedAnswerKanji } = validatedFields.data;
 
-    // Check against hiragana reading and kanji
+    const isKatakanaExpected = wanakana.isKatakana(expectedAnswer);
+    const userAnswer = isKatakanaExpected ? wanakana.toKatakana(rawUserAnswer) : wanakana.toHiragana(rawUserAnswer);
+
+    // Check against hiragana/katakana reading and kanji
     const isCorrect = userAnswer === expectedAnswer || (expectedAnswerKanji && userAnswer === expectedAnswerKanji);
 
     if (isCorrect) {
@@ -56,7 +59,7 @@ export async function checkAnswer(
       };
     }
 
-    // If not a direct match, use AI for validation, comparing user's answer with the hiragana reading
+    // If not a direct match, use AI for validation, comparing user's answer with the hiragana/katakana reading
     const result = await validateJapaneseInput({
       userAnswer: userAnswer,
       expectedAnswer: expectedAnswer,

@@ -48,7 +48,13 @@ export default function PracticePage() {
   const [state, formAction] = useActionState(checkAnswer, initialState);
   const [currentWord, setCurrentWord] = useState<VocabularyItem | null>(null);
   const [romajiInput, setRomajiInput] = useState('');
-  const hiraganaOutput = useMemo(() => wanakana.toHiragana(romajiInput), [romajiInput]);
+  
+  const hiraganaOutput = useMemo(() => {
+    if (currentWord && wanakana.isKatakana(currentWord.reading)) {
+        return wanakana.toKatakana(romajiInput);
+    }
+    return wanakana.toHiragana(romajiInput)
+  }, [romajiInput, currentWord]);
 
   const [selectedChapters, setSelectedChapters] = useState<number[]>([1]);
   const [vocabularyList, setVocabularyList] = useState<VocabularyItem[]>([]);
@@ -240,7 +246,7 @@ export default function PracticePage() {
       </Card>
 
       <form action={formAction} ref={formRef} className="w-full max-w-2xl space-y-4">
-        <input type="hidden" name="userAnswer" value={hiraganaOutput} />
+        <input type="hidden" name="userAnswer" value={wanakana.toHiragana(romajiInput, { passRomaji: true })} />
         <input type="hidden" name="expectedAnswer" value={currentWord.reading} />
         <input type="hidden" name="expectedAnswerKanji" value={currentWord.japanese} />
 
@@ -272,7 +278,7 @@ export default function PracticePage() {
           </AlertTitle>
           <AlertDescription>
             {state.feedback}
-            {state.isValid === false && ` Jawaban yang benar: ${currentWord.reading} (${currentWord.japanese})`}
+            {state.isValid === false && ` Jawaban yang benar: ${currentWord.reading} ${currentWord.japanese ? `(${currentWord.japanese})` : ''}`}
           </AlertDescription>
         </Alert>
       )}
