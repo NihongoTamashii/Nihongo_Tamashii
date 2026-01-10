@@ -1,74 +1,51 @@
-'use client';
-
-import { useState, useMemo, useEffect } from 'react';
-import { vocabularyList } from '@/lib/vocabulary';
-import { Flashcard } from '@/components/flashcard';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft, ArrowRight, Shuffle } from 'lucide-react';
-import type { VocabularyItem } from '@/lib/vocabulary';
+import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { BookOpen, Pencil } from 'lucide-react';
 
 export default function Home() {
-  const [shuffledList, setShuffledList] = useState<VocabularyItem[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    handleShuffle();
-  }, []);
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % shuffledList.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + shuffledList.length) % shuffledList.length
-    );
-  };
-
-  const handleShuffle = () => {
-    // Ensure this runs only on the client
-    const shuffled = [...vocabularyList].sort(() => Math.random() - 0.5);
-    setShuffledList(shuffled);
-    setCurrentIndex(0);
-  };
-
-  const currentItem = useMemo(() => {
-    if (shuffledList.length === 0) return null;
-    return shuffledList[currentIndex];
-  }, [currentIndex, shuffledList]);
-
-  if (!currentItem) {
-    return null; // or a loading state
-  }
+  const menuItems = [
+    {
+      href: '/learn',
+      title: 'Menghapal Kotoba',
+      description: 'Gunakan flashcard untuk menghapal kosakata baru.',
+      icon: BookOpen,
+    },
+    {
+      href: '/practice',
+      title: 'Latihan Kotoba',
+      description: 'Uji pengetahuan kosakata Anda dengan latihan interaktif.',
+      icon: Pencil,
+    },
+  ];
 
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-8 pt-10">
       <div className="text-center">
         <h1 className="text-4xl font-headline font-bold tracking-tight lg:text-5xl">
-          Menghapal Kotoba
+          Selamat Datang di Kotoba Drill
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Gunakan flashcard untuk menghapal kosakata. Klik kartu untuk melihat
-          artinya.
+          Pilih mode belajar untuk memulai.
         </p>
       </div>
-      <div className="w-full max-w-2xl min-h-[20rem]">
-        <Flashcard item={currentItem} key={currentItem.id} />
+
+      <div className="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+        {menuItems.map((item) => (
+          <Link href={item.href} key={item.title} className="group">
+            <Card className="h-full transform transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+              <CardHeader className="flex flex-row items-center gap-4">
+                <item.icon className="h-10 w-10 text-primary" />
+                <CardTitle className="text-2xl font-bold font-headline">
+                  {item.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">{item.description}</p>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
       </div>
-      <div className="flex items-center justify-between w-full max-w-2xl">
-        <Button variant="outline" onClick={handlePrev}>
-          <ArrowLeft className="mr-2 h-4 w-4" /> Sebelumnya
-        </Button>
-        <span className="text-sm font-medium text-muted-foreground">
-          {currentIndex + 1} / {shuffledList.length}
-        </span>
-        <Button variant="outline" onClick={handleNext}>
-          Selanjutnya <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
-      <Button onClick={handleShuffle}>
-        <Shuffle className="mr-2 h-4 w-4" /> Acak Kartu
-      </Button>
     </div>
   );
 }

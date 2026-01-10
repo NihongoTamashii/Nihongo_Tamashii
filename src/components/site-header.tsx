@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { BookOpen, Pencil } from 'lucide-react';
+import { BookOpen, Pencil, Home } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -17,7 +17,8 @@ export function SiteHeader() {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: '/', label: 'Menghapal Kotoba', icon: BookOpen },
+    { href: '/', label: 'Beranda', icon: Home },
+    { href: '/learn', label: 'Menghapal Kotoba', icon: BookOpen },
     { href: '/practice', label: 'Latihan Kotoba', icon: Pencil },
   ];
 

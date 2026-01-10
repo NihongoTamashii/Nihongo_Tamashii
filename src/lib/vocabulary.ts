@@ -5,7 +5,13 @@ export interface VocabularyItem {
   meaning: string;
 }
 
-export const vocabularyList: VocabularyItem[] = [
+export interface Chapter {
+  chapter: number;
+  words: VocabularyItem[];
+}
+
+// Distribute the existing 20 words into 4 chapters
+const allWords: VocabularyItem[] = [
   { id: 1, japanese: '学ぶ', reading: 'まなぶ', meaning: 'Belajar' },
   { id: 2, japanese: '学校', reading: 'がっこう', meaning: 'Sekolah' },
   { id: 3, japanese: '学生', reading: 'がくせい', meaning: 'Siswa' },
@@ -27,3 +33,20 @@ export const vocabularyList: VocabularyItem[] = [
   { id: 19, japanese: '今日', reading: 'きょう', meaning: 'Hari ini' },
   { id: 20, japanese: '明日', reading: 'あした', meaning: 'Besok' },
 ];
+
+export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
+  const chapterNumber = i + 1;
+  let words: VocabularyItem[] = [];
+  if (chapterNumber === 1) words = allWords.slice(0, 5);
+  if (chapterNumber === 2) words = allWords.slice(5, 10);
+  if (chapterNumber === 3) words = allWords.slice(10, 15);
+  if (chapterNumber === 4) words = allWords.slice(15, 20);
+
+  return {
+    chapter: chapterNumber,
+    words: words,
+  };
+});
+
+// For practice page, we can provide a flat list for simplicity of random selection
+export const vocabularyList: VocabularyItem[] = allWords;
