@@ -43,23 +43,24 @@ export async function checkAnswer(
 
   const { userAnswer: rawUserAnswer, expectedAnswer, expectedAnswerKanji } =
     validatedFields.data;
+    
+  const cleanExpectedAnswer = expectedAnswer.startsWith('～')
+  ? expectedAnswer.substring(1)
+  : expectedAnswer;
+  
+  const cleanExpectedAnswerKanji =
+  expectedAnswerKanji && expectedAnswerKanji.startsWith('～')
+  ? expectedAnswerKanji.substring(1)
+  : expectedAnswerKanji;
 
-  const isKatakanaExpected = wanakana.isKatakana(expectedAnswer);
+  const isKatakanaExpected = wanakana.isKatakana(cleanExpectedAnswer);
   const userAnswer = isKatakanaExpected
     ? wanakana.toKatakana(rawUserAnswer, { passRomaji: true })
     : wanakana.toHiragana(rawUserAnswer, { passRomaji: true });
 
-  const cleanExpectedAnswer = expectedAnswer.startsWith('～')
-    ? expectedAnswer.substring(1)
-    : expectedAnswer;
-  const cleanExpectedAnswerKanji =
-    expectedAnswerKanji && expectedAnswerKanji.startsWith('～')
-      ? expectedAnswerKanji.substring(1)
-      : expectedAnswerKanji;
-
   const isCorrect =
     userAnswer === cleanExpectedAnswer ||
-    (cleanExpectedAnswerKanji && userAnswer === cleanExpectedAnswerKanji);
+    (cleanExpectedAnswerKanji !== '' && userAnswer === cleanExpectedAnswerKanji);
 
   if (isCorrect) {
     return {
