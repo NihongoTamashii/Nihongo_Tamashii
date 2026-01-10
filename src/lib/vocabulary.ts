@@ -233,8 +233,86 @@ const chapter4Words: VocabularyItem[] = [
   { id: 211, reading: 'でんわばんごうあんない', japanese: '電話番号案内', meaning: 'Petunjuk nomor telepon' },
 ];
 
+const chapter5Words: VocabularyItem[] = [
+  { id: 212, reading: 'いきます', japanese: '行きます', meaning: 'Pergi' },
+  { id: 213, reading: 'きます', japanese: '来ます', meaning: 'Datang' },
+  { id: 214, reading: 'かえります', japanese: '帰ります', meaning: 'Pulang' },
+  { id: 215, reading: 'がっこう', japanese: '学校', meaning: 'Sekolahan' },
+  { id: 216, reading: 'スーパー', japanese: 'スーパー', meaning: 'Supermarket' },
+  { id: 217, reading: 'えき', japanese: '駅', meaning: 'Stasiun' },
+  { id: 218, reading: 'ひこうき', japanese: '飛行機', meaning: 'Pesawat terbang' },
+  { id: 219, reading: 'ふね', japanese: '船', meaning: 'Kapal laut' },
+  { id: 220, reading: 'でんしゃ', japanese: '電車', meaning: 'Kereta listrik' },
+  { id: 221, reading: 'ちかてつ', japanese: '地下鉄', meaning: 'Kereta bawah tanah' },
+  { id: 222, reading: 'しんかんせん', japanese: '新幹線', meaning: 'Shinkansen' },
+  { id: 223, reading: 'バス', japanese: 'バス', meaning: 'Bus' },
+  { id: 224, reading: 'タクシー', japanese: 'タクシー', meaning: 'Taksi' },
+  { id: 225, reading: 'じてんしゃ', japanese: '自転車', meaning: 'Sepeda' },
+  { id: 226, reading: 'あるいて', japanese: '歩いて', meaning: 'Jalan kaki' },
+  { id: 227, reading: 'ひと', japanese: '人', meaning: 'Orang' },
+  { id: 228, reading: 'ともだち', japanese: '友達', meaning: 'Teman' },
+  { id: 229, reading: 'かれ', japanese: '彼', meaning: 'Dia (laki-laki)' },
+  { id: 230, reading: 'かのじょ', japanese: '彼女', meaning: 'Dia (perempuan)' },
+  { id: 231, reading: 'かぞく', japanese: '家族', meaning: 'Keluarga' },
+  { id: 232, reading: 'ひとりで', japanese: '一人で', meaning: 'Sendirian' },
+  { id: 233, reading: 'せんしゅう', japanese: '先週', meaning: 'Minggu lalu' },
+  { id: 234, reading: 'こんしゅう', japanese: '今週', meaning: 'Minggu ini' },
+  { id: 235, reading: 'らいしゅう', japanese: '来週', meaning: 'Minggu depan' },
+  { id: 236, reading: 'せんげつ', japanese: '先月', meaning: 'Bulan lalu' },
+  { id: 237, reading: 'こんげつ', japanese: '今月', meaning: 'Bulan ini' },
+  { id: 238, reading: 'らいげつ', japanese: '来月', meaning: 'Bulan depan' },
+  { id: 239, reading: 'きょねん', japanese: '去年', meaning: 'Tahun lalu' },
+  { id: 240, reading: 'ことし', japanese: '今年', meaning: 'Tahun ini' },
+  { id: 241, reading: 'らいねん', japanese: '来年', meaning: 'Tahun depan' },
+  { id: 242, reading: '～ねん', japanese: '～年', meaning: 'Tahun' },
+  { id: 243, reading: 'なんねん', japanese: '何年', meaning: 'Tahun berapa?' },
+  { id: 244, reading: '～がつ', japanese: '～月', meaning: 'Bulan' },
+  { id: 245, reading: 'なんがつ', japanese: '何月', meaning: 'Bulan apa?' },
+  { id: 246, reading: 'ついたち', japanese: '一日', meaning: 'Tanggal 1' },
+  { id: 247, reading: 'ふつか', japanese: '二日', meaning: 'Tanggal 2 , 2 hari' },
+  { id: 248, reading: 'みっか', japanese: '三日', meaning: 'Tanggal 3 , 3 hari' },
+  { id: 249, reading: 'よっか', japanese: '四日', meaning: 'Tanggal 4 , 4 hari' },
+  { id: 250, reading: 'いつか', japanese: '五日', meaning: 'Tanggal 5 , 5 hari' },
+  { id: 251, reading: 'むいか', japanese: '六日', meaning: 'Tanggal 6 , 6 hari' },
+  { id: 252, reading: 'なのか', japanese: '七日', meaning: 'Tanggal 7 , 7 hari' },
+  { id: 253, reading: 'ようか', japanese: '八日', meaning: 'Tanggal 8, 8 hari' },
+  { id: 254, reading: 'ここのか', japanese: '九日', meaning: 'Tanggal 9 , 9 hari' },
+  { id: 255, reading: 'とおか', japanese: '十日', meaning: 'Tanggal 10, 10 hari' },
+  { id: 256, reading: 'じゅうよっか', japanese: '十四日', meaning: 'Tanggal 14 , 14 hari' },
+  { id: 257, reading: 'はつか', japanese: '二十日', meaning: 'Tanggal 20 , 20 hari' },
+  { id: 258, reading: 'にじゅうよっか', japanese: '二十四日', meaning: 'Tanggal 24 , 24 hari' },
+  { id: 259, reading: '～にち', japanese: '～日', meaning: 'Tanggal , hari' },
+  { id: 260, reading: 'なんにち', japanese: '何日', meaning: 'Tanggal berapa, berapa hari' },
+  { id: 261, reading: 'いつ', japanese: 'いつ', meaning: 'Kapan' },
+  { id: 262, reading: 'たんじょうび', japanese: '誕生日', meaning: 'Hari ulang tahun' },
+  { id: 263, reading: 'そうですね', japanese: 'そうですね', meaning: 'Ya begitulah' },
+  { id: 264, reading: 'どういたしまして', japanese: 'どういたしまして', meaning: 'Sama-sama' },
+  { id: 265, reading: '～ばんせん', japanese: '～番線', meaning: 'Peron nomor , jalur nomor' },
+  { id: 266, reading: 'つぎの', japanese: '次の', meaning: 'Yang berikutnya' },
+  { id: 267, reading: 'ふつう', japanese: '普通', meaning: 'Biasa' },
+  { id: 268, reading: 'きゅうこう', japanese: '急行', meaning: 'Ekspres' },
+  { id: 269, reading: 'とっきゅう', japanese: '特急', meaning: 'Super ekspres' },
+  { id: 270, reading: 'しゅくさいじつ', japanese: '祝祭日', meaning: 'Hari libur nasional' },
+  { id: 271, reading: 'がんじつ', japanese: '元日', meaning: 'Tahun baru' },
+  { id: 272, reading: 'せいじんのひ', japanese: '成人の日', meaning: 'Hari perayaan menjadi dewasa' },
+  { id: 273, reading: 'けんこくきねんのひ', japanese: '建国記念の日', meaning: 'Hari pembangunan nasional' },
+  { id: 274, reading: 'しゅんぶんのひ', japanese: '春分の日', meaning: 'Hari equinox pada musim semi' },
+  { id: 275, reading: 'しょうわのひ', japanese: '昭和の日', meaning: 'Hari showa' },
+  { id: 276, reading: 'けんぽうきねんび', japanese: '憲法記念日', meaning: 'Hari peringatan konstitusi' },
+  { id: 277, reading: 'みどりのひ', japanese: 'みどりのひ', meaning: 'Hari penghijauan' },
+  { id: 278, reading: 'こどものひ', japanese: 'こどものひ', meaning: 'Hari anak' },
+  { id: 279, reading: 'うみのひ', japanese: '海の日', meaning: 'Hari bahari' },
+  { id: 280, reading: 'やまのひ', japanese: '山の日', meaning: 'Hari gunung' },
+  { id: 281, reading: 'けいろうのひ', japanese: '敬老の日', meaning: 'Hari hormat kepada orang tua' },
+  { id: 282, reading: 'しゅうぶんのひ', japanese: '秋分の日', meaning: 'Hari equinox pada musim gugur' },
+  { id: 283, reading: 'たいいくのひ', japanese: '体育の日', meaning: 'Hari kesehatan olahraga' },
+  { id: 284, reading: 'ぶんかのひ', japanese: '文化の日', meaning: 'Hari kebudayaan' },
+  { id: 285, reading: 'きんろうかんしゃのひ', japanese: '勤労感謝の日', meaning: 'Hari bersyukur untuk pekerjaan' },
+  { id: 286, reading: 'てんのうたんじょうび', japanese: '天皇誕生日', meaning: 'Hari ulang tahun kaisar' },
+];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words];
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
@@ -243,6 +321,7 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   if (chapterNumber === 2) words = chapter2Words;
   if (chapterNumber === 3) words = chapter3Words;
   if (chapterNumber === 4) words = chapter4Words;
+  if (chapterNumber === 5) words = chapter5Words;
 
   return {
     chapter: chapterNumber,
