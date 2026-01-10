@@ -482,8 +482,78 @@ const chapter7Words: VocabularyItem[] = [
   { id: 451, 'reading': 'おこさん', 'japanese': 'おこさん', 'meaning': 'Anak (orang lain)' },
 ];
 
+const chapter8Words: VocabularyItem[] = [
+  { id: 452, reading: 'ハンサム（な）', japanese: 'ハンサム（な）', meaning: 'Tampan / gagah / ganteng' },
+  { id: 453, reading: 'きれい（な）', japanese: 'きれい（な）', meaning: 'Cantik / bersih' },
+  { id: 454, reading: 'しずか（な）', japanese: '静か（な）', meaning: 'Sunyi / tenang' },
+  { id: 455, reading: 'にぎやか（な）', japanese: 'にぎやか（な）', meaning: 'Ramai' },
+  { id: 456, reading: 'ゆうめい（な）', japanese: '有名（な）', meaning: 'Terkenal' },
+  { id: 457, reading: 'しんせつ（な）', japanese: '親切（な）', meaning: 'Baik hati' },
+  { id: 458, reading: 'げんき（な）', japanese: '元気（な）', meaning: 'Sehat' },
+  { id: 459, reading: 'ひま（な）', japanese: '暇（な）', meaning: 'Senggang' },
+  { id: 460, reading: 'べんり（な）', japanese: '便利（な）', meaning: 'Praktis' },
+  { id: 461, reading: 'すてき（な）', japanese: 'すてき（な）', meaning: 'Bagus' },
+  { id: 462, reading: 'おおきい', japanese: '大きい', meaning: 'Besar' },
+  { id: 463, reading: 'ちいさい', japanese: '小さい', meaning: 'Kecil' },
+  { id: 464, reading: 'あたらしい', japanese: '新しい', meaning: 'Baru' },
+  { id: 465, reading: 'ふるい', japanese: '古い', meaning: 'Lama / tua' },
+  { id: 466, reading: 'いい（よい）', japanese: 'いい（よい）', meaning: 'Baik / bagus' },
+  { id: 467, reading: 'わるい', japanese: '悪い', meaning: 'Jelek' },
+  { id: 468, reading: 'あつい', japanese: '暑い', meaning: 'Panas' },
+  { id: 469, reading: 'さむい', japanese: '寒い', meaning: 'Dingin suhu' },
+  { id: 470, reading: 'つめたい', japanese: '冷たい', meaning: 'Dingin benda' },
+  { id: 471, reading: 'むずかしい', japanese: '難しい', meaning: 'Sulit / susah' },
+  { id: 472, reading: 'やさしい', japanese: '易しい', meaning: 'Mudah / gampang' },
+  { id: 473, reading: 'たかい', japanese: '高い', meaning: 'Mahal / tinggi' },
+  { id: 474, reading: 'やすい', japanese: '安い', meaning: 'Murah' },
+  { id: 475, reading: 'ひくい', japanese: '低い', meaning: 'Rendah' },
+  { id: 476, reading: 'おもしろい', japanese: 'おもしろい', meaning: 'Menarik' },
+  { id: 477, reading: 'おいしい', japanese: 'おいしい', meaning: 'Enak' },
+  { id: 478, reading: 'いそがしい', japanese: '忙しい', meaning: 'Sibuk' },
+  { id: 479, reading: 'たのしい', japanese: '楽しい', meaning: 'Senang' },
+  { id: 480, reading: 'しろい', japanese: '白い', meaning: 'Putih' },
+  { id: 481, reading: 'くろい', japanese: '黒い', meaning: 'Hitam' },
+  { id: 482, reading: 'あかい', japanese: '赤い', meaning: 'Merah' },
+  { id: 483, reading: 'あおい', japanese: '青い', meaning: 'Biru' },
+  { id: 484, reading: 'さくら', japanese: '桜', meaning: 'Sakura' },
+  { id: 485, reading: 'やま', japanese: '山', meaning: 'Gunung' },
+  { id: 486, reading: 'まち', japanese: '町', meaning: 'Kota' },
+  { id: 487, reading: 'たべもの', japanese: '食べ物', meaning: 'Makanan' },
+  { id: 488, reading: 'ところ', japanese: '所', meaning: 'Tempat' },
+  { id: 489, reading: 'りょう', japanese: '寮', meaning: 'Asrama' },
+  { id: 490, reading: 'レストラン', japanese: 'レストラン', meaning: 'Restoran' },
+  { id: 491, reading: 'せいかつ', japanese: '生活', meaning: 'Kehidupan' },
+  { id: 492, reading: 'しごと', japanese: '仕事', meaning: 'Pekerjaan' },
+  { id: 493, reading: 'どう', japanese: 'どう', meaning: 'Bagaimana?' },
+  { id: 494, reading: 'どんな～', japanese: 'どんな～', meaning: 'Yang bagaimana ?' },
+  { id: 495, reading: 'とても', japanese: 'とても', meaning: 'Sangat / ~sekali' },
+  { id: 496, reading: 'あまり', japanese: 'あまり', meaning: 'Tidak begitu ~ / kurang begitu ~' },
+  { id: 497, reading: 'そして', japanese: 'そして', meaning: 'Kemudian' },
+  { id: 498, reading: '～が～', japanese: '～が～', meaning: 'Tetapi' },
+  { id: 499, reading: 'おげんきですか', japanese: 'お元気ですか', meaning: 'Apa kabar ?' },
+  { id: 500, reading: 'そうですね', japanese: 'そうですね', meaning: 'Bagaimana ya?' },
+  { id: 501, reading: '～もういっぱいいかがですか', japanese: '～もういっぱいいかがですか', meaning: 'Mau nambah secangkir lagi ?' },
+  { id: 502, reading: '（いいえ）けっこうです', japanese: '（いいえ）けっこうです', meaning: 'Cukup' },
+  { id: 503, reading: 'そろそろしつれいします', japanese: 'そろそろ失礼します', meaning: 'Maaf saya mau pamit dulu' },
+  { id: 504, reading: 'いいえ', japanese: 'いいえ', meaning: 'Sama-sama' },
+  { id: 505, reading: 'またいらっしゃってください', japanese: 'またいらっしゃってください', meaning: 'Silakan datang lagi' },
+  { id: 506, reading: 'シャンハイ', japanese: 'シャンハイ', meaning: 'Shanghai' },
+  { id: 507, reading: 'みどり', japanese: 'みどり', meaning: 'Hijau' },
+  { id: 508, reading: 'むらさき', japanese: 'むらさき', meaning: 'Ungu' },
+  { id: 509, reading: 'きいろい', japanese: 'きいろい', meaning: 'Kuning' },
+  { id: 510, reading: 'ちゃいろい', japanese: 'ちゃいろい', meaning: 'Coklat' },
+  { id: 511, reading: 'ピンク', japanese: 'ピンク', meaning: 'Merah muda' },
+  { id: 512, reading: 'オレンジ', japanese: 'オレンジ', meaning: 'Oranye' },
+  { id: 513, reading: 'グレー', japanese: 'グレー', meaning: 'Abu-abu' },
+  { id: 514, reading: 'ベージュ', japanese: 'ベージュ', meaning: 'Krem' },
+  { id: 515, reading: 'はる', japanese: '春', meaning: 'Musim semi' },
+  { id: 516, reading: 'なつ', japanese: '夏', meaning: 'Musim panas' },
+  { id: 517, reading: 'あき', japanese: '秋', meaning: 'Musim gugur' },
+  { id: 518, reading: 'ふゆ', japanese: '冬', meaning: 'Musim dingin' },
+];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words];
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words, ...chapter8Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
@@ -495,6 +565,7 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   if (chapterNumber === 5) words = chapter5Words;
   if (chapterNumber === 6) words = chapter6Words;
   if (chapterNumber === 7) words = chapter7Words;
+  if (chapterNumber === 8) words = chapter8Words;
 
   return {
     chapter: chapterNumber,
