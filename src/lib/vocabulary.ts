@@ -169,7 +169,72 @@ const chapter3Words: VocabularyItem[] = [
   { id: 150, reading: 'しょくひん', japanese: '食品', meaning: 'Makanan' },
 ];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words];
+const chapter4Words: VocabularyItem[] = [
+  { id: 151, reading: 'おきます', japanese: '起きます', meaning: 'Bangun tidur' },
+  { id: 152, reading: 'ねます', japanese: '寝ます', meaning: 'Tidur' },
+  { id: 153, reading: 'はたらきます', japanese: '働きます', meaning: 'Bekerja' },
+  { id: 154, reading: 'やすみます', japanese: '休みます', meaning: 'Beristirahat , libur' },
+  { id: 155, reading: 'べんきょうします', japanese: '勉強します', meaning: 'Belajar' },
+  { id: 156, reading: 'おわります', japanese: '終わります', meaning: 'Selesai' },
+  { id: 157, reading: 'デパート', japanese: 'デパート', meaning: 'Departemen store' },
+  { id: 158, reading: 'ぎんこう', japanese: '銀行', meaning: 'Bank' },
+  { id: 159, reading: 'ゆうびんきょく', japanese: '郵便局', meaning: 'Kantor pos' },
+  { id: 160, reading: 'としょかん', japanese: '図書館', meaning: 'Perpustakaan' },
+  { id: 161, reading: 'びじゅつかん', japanese: '美術館', meaning: 'Gedung kesenian' },
+  { id: 162, reading: 'いま', japanese: '今', meaning: 'Sekarang' },
+  { id: 163, reading: '～じ', japanese: '～時', meaning: 'Jam , pukul' },
+  { id: 164, reading: '～ふん／ぶん', japanese: '～分', meaning: 'Menit' },
+  { id: 165, reading: 'はん', japanese: '半', meaning: 'Setengah' },
+  { id: 166, reading: 'なんじ', japanese: '何時', meaning: 'Jam berapa?' },
+  { id: 167, reading: 'なんぷん', japanese: '何分', meaning: 'Berapa menit ?' },
+  { id: 168, reading: 'ごぜん', japanese: '午前', meaning: 'AM (waktu sebelum jam 12 siang)' },
+  { id: 169, reading: 'ごご', japanese: '午後', meaning: 'PM (waktu setelah jam 12 siang)' },
+  { id: 170, reading: 'あさ', japanese: '朝', meaning: 'Pagi' },
+  { id: 171, reading: 'ひる', japanese: '昼', meaning: 'Siang' },
+  { id: 172, reading: 'ばん', japanese: '晩', meaning: 'Malam' },
+  { id: 173, reading: 'よる', japanese: '夜', meaning: 'Malam' },
+  { id: 174, reading: 'おととい', japanese: '一昨日', meaning: '2 hari yang lalu , kemarin lusa' },
+  { id: 175, reading: 'きのう', japanese: '昨日', meaning: 'Kemarin' },
+  { id: 176, reading: 'きょう', japanese: '今日', meaning: 'Hari ini' },
+  { id: 177, reading: 'あした', japanese: '明日', meaning: 'Besok' },
+  { id: 178, reading: 'あさって', japanese: '明後日', meaning: 'Besok lusa' },
+  { id: 179, reading: 'けさ', japanese: '今朝', meaning: 'Tadi pagi' },
+  { id: 180, reading: 'こんばん', japanese: '今晩', meaning: 'Malam ini' },
+  { id: 181, reading: 'やすみ', japanese: '休み', meaning: 'Istirahat, cuti, libur' },
+  { id: 182, reading: 'ひるやすみ', japanese: '昼休み', meaning: 'Istirahat siang' },
+  { id: 183, reading: 'しけん', japanese: '試験', meaning: 'Ujian' },
+  { id: 184, reading: 'かいぎ', japanese: '会議', meaning: 'Rapat' },
+  { id: 185, reading: 'えいが', japanese: '映画', meaning: 'Film' },
+  { id: 186, reading: 'まいあさ', japanese: '毎朝', meaning: 'Setiap pagi' },
+  { id: 187, reading: 'まいばん', japanese: '毎晩', meaning: 'Setiap malam' },
+  { id: 188, reading: 'まいにち', japanese: '毎日', meaning: 'Setiap hari' },
+  { id: 189, reading: 'げつようび', japanese: '月曜日', meaning: 'Hari senin' },
+  { id: 190, reading: 'かようび', japanese: '火曜日', meaning: 'Hari selasa' },
+  { id: 191, reading: 'すいようび', japanese: '水曜日', meaning: 'Hari rabo' },
+  { id: 192, reading: 'もくようび', japanese: '木曜日', meaning: 'Hari kamis' },
+  { id: 193, reading: 'きんようび', japanese: '金曜日', meaning: 'Hari jumat' },
+  { id: 194, reading: 'どようび', japanese: '土曜日', meaning: 'Hari sabtu' },
+  { id: 195, reading: 'にちようび', japanese: '日曜日', meaning: 'Hari minggu' },
+  { id: 196, reading: 'なんようび', japanese: '何曜日', meaning: 'Hari apa?' },
+  { id: 197, reading: '～から', japanese: '～から', meaning: 'Dari' },
+  { id: 198, reading: '～まで', japanese: '～まで', meaning: 'Sampai' },
+  { id: 199, reading: '～と～', japanese: '～と～', meaning: 'Dan' },
+  { id: 200, reading: 'たいへんですね', japanese: '大変ですね', meaning: 'Berat ya,' },
+  { id: 201, reading: 'ばんごう', japanese: '番号', meaning: 'Nomer' },
+  { id: 202, reading: 'なんばん', japanese: '何番', meaning: 'Nomer berapa?' },
+  { id: 203, reading: 'ニューヨーク', japanese: 'ニューヨーク', meaning: 'New york' },
+  { id: 204, reading: 'ペキン', japanese: 'ペキン', meaning: 'Beijing' },
+  { id: 205, reading: 'ロサンゼルス', japanese: 'ロサンゼルス', meaning: 'Los angels' },
+  { id: 206, reading: 'ロンドン', japanese: 'ロンドン', meaning: 'London' },
+  { id: 207, reading: 'けいさつしょ', japanese: '警察署', meaning: 'Kantor polisi' },
+  { id: 208, reading: 'しょうぼうしょ', japanese: '消防署', meaning: 'Pemadam kebakaran' },
+  { id: 209, reading: 'じほう', japanese: '時報', meaning: 'Pemberitahuan waktu' },
+  { id: 210, reading: 'てんきよほう', japanese: '天気予報', meaning: 'Ramalan cuaca' },
+  { id: 211, reading: 'でんわばんごうあんない', japanese: '電話番号案内', meaning: 'Petunjuk nomor telepon' },
+];
+
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
@@ -177,6 +242,7 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   if (chapterNumber === 1) words = chapter1Words;
   if (chapterNumber === 2) words = chapter2Words;
   if (chapterNumber === 3) words = chapter3Words;
+  if (chapterNumber === 4) words = chapter4Words;
 
   return {
     chapter: chapterNumber,
