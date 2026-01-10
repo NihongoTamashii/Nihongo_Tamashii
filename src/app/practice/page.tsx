@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo, useActionState } from 'react';
+import { useState, useEffect, useRef, useMemo, useActionState, useCallback } from 'react';
 import * as wanakana from 'wanakana';
-import { vocabularyList, type VocabularyItem } from '@/lib/vocabulary';
+import { chapters, type VocabularyItem } from '@/lib/vocabulary';
 import { JapaneseKeyboard } from '@/components/japanese-keyboard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,8 +13,19 @@ import {
   Lightbulb,
   Loader2,
   AlertCircle,
+  BookCheck,
+  Play,
+  Settings,
 } from 'lucide-react';
 import { checkAnswer, type FormState } from './actions';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const initialState: FormState = {
   isValid: null,
@@ -39,10 +50,47 @@ export default function PracticePage() {
   const [romajiInput, setRomajiInput] = useState('');
   const hiraganaOutput = useMemo(() => wanakana.toHiragana(romajiInput), [romajiInput]);
 
+  const [selectedChapters, setSelectedChapters] = useState<number[]>([1]);
+  const [vocabularyList, setVocabularyList] = useState<VocabularyItem[]>([]);
+  const [isSessionStarted, setIsSessionStarted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    const newWord = getRandomItem(vocabularyList);
-    setCurrentWord(newWord);
-  }, []);
+    if (isSessionStarted) {
+      setIsLoading(true);
+      const words = chapters
+        .filter((c) => selectedChapters.includes(c.chapter))
+        .flatMap((c) => c.words);
+      setVocabularyList(words);
+      if (words.length > 0) {
+        setCurrentWord(getRandomItem(words));
+      } else {
+        setCurrentWord(null);
+      }
+      setIsLoading(false);
+    }
+  }, [selectedChapters, isSessionStarted]);
+
+  const handleStartSession = () => {
+    if (selectedChapters.length > 0) {
+      setIsSessionStarted(true);
+    }
+  };
+
+  const handleEndSession = () => {
+    setIsSessionStarted(false);
+    setCurrentWord(null);
+    setVocabularyList([]);
+  };
+
+  const handleChapterSelection = (chapter: number) => {
+    setSelectedChapters((prev) => {
+      const newSelection = prev.includes(chapter)
+        ? prev.filter((c) => c !== chapter)
+        : [...prev, chapter];
+      return newSelection.length > 0 ? newSelection : prev;
+    });
+  };
 
   const handleKeyPress = (key: string) => {
     if (state.isValid === null) {
@@ -83,13 +131,89 @@ export default function PracticePage() {
     }
   },[state.isValid])
 
-  if (!currentWord) {
+  if (!isSessionStarted) {
+    return (
+      <div className="flex flex-col items-center gap-8">
+      <div className="text-center">
+        <h1 className="text-4xl font-headline font-bold tracking-tight lg:text-5xl">
+          Latihan Kotoba
+        </h1>
+        <p className="mt-2 text-lg text-muted-foreground">
+          Pilih bab yang ingin Anda latih untuk memulai sesi.
+        </p>
+      </div>
+
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <BookCheck className="h-6 w-6 text-primary" />
+            <span>Pengaturan Sesi Latihan</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
+          <div className="flex w-full items-center justify-center gap-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="w-full">
+                  <BookCheck className="mr-2 h-4 w-4" />
+                  Pilih Bab ({selectedChapters.length})
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64 max-h-80 overflow-y-auto">
+                <DropdownMenuLabel>Pilih Bab untuk Dilatih</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {chapters
+                  .filter((chapter) => chapter.words.length > 0)
+                  .map((chapter) => (
+                    <DropdownMenuCheckboxItem
+                      key={chapter.chapter}
+                      checked={selectedChapters.includes(chapter.chapter)}
+                      onSelect={(e) => e.preventDefault()}
+                      onClick={() => handleChapterSelection(chapter.chapter)}
+                    >
+                      Bab {chapter.chapter} ({chapter.words.length} Kosakata)
+                    </DropdownMenuCheckboxItem>
+                  ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <Button
+            onClick={handleStartSession}
+            disabled={selectedChapters.length === 0}
+            className="w-full"
+            size="lg"
+          >
+            <Play className="mr-2 h-5 w-5" />
+            Mulai Latihan
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+    );
+  }
+
+  if (isLoading) {
     return (
        <div className="flex h-full min-h-[400px] flex-col items-center justify-center">
          <Loader2 className="h-12 w-12 animate-spin text-primary" />
        </div>
     );
   }
+  
+  if (!currentWord) {
+    return (
+       <div className="flex h-full min-h-[400px] flex-col items-center justify-center text-center">
+        <p className="text-xl font-semibold">Tidak ada kata.</p>
+        <p className="text-muted-foreground">
+          Tidak ada kosakata dalam bab yang dipilih.
+        </p>
+        <Button onClick={handleEndSession} className="mt-4">
+          Pilih Bab Lain
+        </Button>
+       </div>
+    );
+  }
+
 
   return (
     <div className="flex flex-col items-center gap-8">
@@ -154,9 +278,14 @@ export default function PracticePage() {
       )}
 
       {state.isValid !== null ? (
-        <Button onClick={handleNextQuestion} className="w-full max-w-2xl">
-          Soal Berikutnya
-        </Button>
+        <div className="flex w-full max-w-2xl justify-center gap-4">
+          <Button onClick={handleNextQuestion} className="flex-1">
+            Soal Berikutnya
+          </Button>
+          <Button onClick={handleEndSession} variant="outline" className="flex-1">
+            <Settings className="mr-2 h-4 w-4" /> Ubah Pilihan Bab
+          </Button>
+        </div>
       ) : (
         <JapaneseKeyboard
           onKeyPress={handleKeyPress}
