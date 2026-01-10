@@ -99,13 +99,84 @@ const chapter2Words: VocabularyItem[] = [
   { id: 83, reading: "こちらこそよろしくおねがいします", japanese: "こちらこそよろしくおねがいします", meaning: "Ya sama-sama" },
 ];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words];
+const chapter3Words: VocabularyItem[] = [
+  { id: 84, reading: 'ここ', japanese: 'ここ', meaning: 'Disini' },
+  { id: 85, reading: 'そこ', japanese: 'そこ', meaning: 'Disitu' },
+  { id: 86, reading: 'あそこ', japanese: 'あそこ', meaning: 'Disana' },
+  { id: 87, reading: 'どこ', japanese: 'どこ', meaning: 'Dimana?' },
+  { id: 88, reading: 'こちら', japanese: 'こちら', meaning: 'Disini' },
+  { id: 89, reading: 'そちら', japanese: 'そちら', meaning: 'Disitu' },
+  { id: 90, reading: 'あちら', japanese: 'あちら', meaning: 'Disana' },
+  { id: 91, reading: 'どちら', japanese: 'どちら', meaning: 'Dimana ?' },
+  { id: 92, reading: 'きょうしつ', japanese: '教室', meaning: 'Ruang kelas' },
+  { id: 93, reading: 'しょくどう', japanese: '食堂', meaning: 'Ruang makan, Kantin' },
+  { id: 94, reading: 'じむしょ', japanese: '事務所', meaning: 'Kantor' },
+  { id: 95, reading: 'かいぎしつ', japanese: '会議室', meaning: 'Ruang rapat' },
+  { id: 96, reading: 'うけつけ', japanese: '受付', meaning: 'Meja informasi' },
+  { id: 97, reading: 'ロビー', japanese: 'ロビー', meaning: 'Ruang tunggu, lobi' },
+  { id: 98, reading: 'へや', japanese: '部屋', meaning: 'Kamar' },
+  { id: 99, reading: 'おてあらい', japanese: 'お手洗い', meaning: 'Kamar kecil, WC' },
+  { id: 100, reading: 'トイレ', japanese: 'トイレ', meaning: 'Toilet' },
+  { id: 101, reading: 'かいだん', japanese: '階段', meaning: 'Tangga' },
+  { id: 102, reading: 'エレベーター', japanese: 'エレベーター', meaning: 'Lift' },
+  { id: 103, reading: 'エスカレーター', japanese: 'エスカレーター', meaning: 'Eskalator, tangga berjalan' },
+  { id: 104, reading: 'じどうはんばいき', japanese: '自動販売機', meaning: 'Mesin jual otomatis' },
+  { id: 105, reading: 'でんわ', japanese: '電話', meaning: 'Telepon' },
+  { id: 106, reading: 'おくに', japanese: 'お国', meaning: 'Negara' },
+  { id: 107, reading: 'かいしゃ', japanese: '会社', meaning: 'Perusahaan' },
+  { id: 108, reading: 'うち', japanese: '家', meaning: 'Rumah' },
+  { id: 109, reading: 'くつ', japanese: '靴', meaning: 'Sepatu' },
+  { id: 110, reading: 'ネクタイ', japanese: 'ネクタイ', meaning: 'Dasi' },
+  { id: 111, reading: 'ワイン', japanese: 'ワイン', meaning: 'Anggur putih' },
+  { id: 112, reading: 'うりば', japanese: '売り場', meaning: 'Tempat penjualan' },
+  { id: 113, reading: 'ちか', japanese: '地下', meaning: 'Bawah tanah , basement' },
+  { id: 114, reading: '～かい', japanese: '～階', meaning: 'lantai～/ tingkat～' },
+  { id: 115, reading: 'なんがい', japanese: '何階', meaning: 'Lantai berapa?' },
+  { id: 116, reading: '～えん', japanese: '～円', meaning: '～yen' },
+  { id: 117, reading: 'いくら', japanese: 'いくら', meaning: 'Berapa?' },
+  { id: 118, reading: 'ひゃく', japanese: '百', meaning: 'Seratus' },
+  { id: 119, reading: 'せん', japanese: '千', meaning: 'Seribu' },
+  { id: 120, reading: 'まん', japanese: '万', meaning: 'Puluh ribu' },
+  { id: 121, reading: 'すみません', japanese: 'すみません', meaning: 'Maaf' },
+  { id: 122, reading: 'どうも', japanese: 'どうも', meaning: 'Terima kasih' },
+  { id: 123, reading: 'いらっしゃいませ', japanese: 'いらっしゃいませ', meaning: 'Selamat datang' },
+  { id: 124, reading: 'みせてください', japanese: '見せてください', meaning: 'Tolong perlihatkan' },
+  { id: 125, reading: 'じゃ', japanese: 'じゃ', meaning: 'Kalau begitu' },
+  { id: 126, reading: '～をください', japanese: '～をください', meaning: 'Tolong ～' },
+  { id: 127, reading: 'イタリア', japanese: 'イタリア', meaning: 'Italia' },
+  { id: 128, reading: 'スイス', japanese: 'スイス', meaning: 'Swis' },
+  { id: 129, reading: 'フランス', japanese: 'フランス', meaning: 'Perancis' },
+  { id: 130, reading: 'ジャカルタ', japanese: 'ジャカルタ', meaning: 'Jakarta' },
+  { id: 131, reading: 'バンコク', japanese: 'バンコク', meaning: 'Bangkok' },
+  { id: 132, reading: 'ベルリン', japanese: 'ベルリン', meaning: 'Berlin' },
+  { id: 133, reading: 'おくじょう', japanese: '屋上', meaning: 'Lantai atas' },
+  { id: 134, reading: 'レストラン', japanese: 'レストラン', meaning: 'Restoran' },
+  { id: 135, reading: 'ゆうえんち', japanese: '遊園地', meaning: 'Tempat hiburan' },
+  { id: 136, reading: 'もよおしものかいじょう', japanese: '催し物会場', meaning: 'Tempat pertunjukan' },
+  { id: 137, reading: 'めがね', japanese: '眼鏡', meaning: 'Kacamata' },
+  { id: 138, reading: 'スポーツようひん', japanese: 'スポーツ用品', meaning: 'Peralatan olahraga' },
+  { id: 139, reading: 'りょこうようひん', japanese: '旅行用品', meaning: 'Peralatan wisata' },
+  { id: 140, reading: 'こどものふく', japanese: '子供の服', meaning: 'Pakaian anak' },
+  { id: 141, reading: 'おもちゃ', japanese: 'おもちゃ', meaning: 'Mainan' },
+  { id: 142, reading: 'ぶんぼうぐ', japanese: '文房具', meaning: 'Alat tulis' },
+  { id: 143, reading: 'かぐ', japanese: '家具', meaning: 'Perlengkapan rumah' },
+  { id: 144, reading: 'しょっき', japanese: '食器', meaning: 'Peralatan makan' },
+  { id: 145, reading: 'でんかせいひん', japanese: '電化製品', meaning: 'Barang elektronik' },
+  { id: 146, reading: 'しんしふく', japanese: '紳士服', meaning: 'Pakaian pria' },
+  { id: 147, reading: 'ふじんふく', japanese: '婦人服', meaning: 'Pakaian wanita' },
+  { id: 148, reading: 'アクセサリー', japanese: 'アクセサリー', meaning: 'Perhiasan, aksesoris' },
+  { id: 149, reading: 'けしょうひん', japanese: '化粧品', meaning: 'Kosmetik' },
+  { id: 150, reading: 'しょくひん', japanese: '食品', meaning: 'Makanan' },
+];
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
   let words: VocabularyItem[] = [];
   if (chapterNumber === 1) words = chapter1Words;
   if (chapterNumber === 2) words = chapter2Words;
+  if (chapterNumber === 3) words = chapter3Words;
 
   return {
     chapter: chapterNumber,
