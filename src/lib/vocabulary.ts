@@ -413,7 +413,7 @@ const chapter7Words: VocabularyItem[] = [
   { id: 382, reading: 'かります', japanese: '借ります', meaning: 'Meminjam / menyewa' },
   { id: 383, reading: 'おしえます', japanese: '教えます', meaning: 'Mengajar' },
   { id: 384, reading: 'ならいます', japanese: '習います', meaning: 'Belajar (kepada)' },
-  { id: 385, reading: 'かけます', japanese: '（を）', meaning: 'Menelpon' },
+  { id: 385, reading: 'かけます', japanese: 'かけます', meaning: 'Menelpon' },
   { id: 386, reading: 'て', japanese: '手', meaning: 'Tangan' },
   { id: 387, reading: 'はし', japanese: 'はし', meaning: 'Sumpit' },
   { id: 388, reading: 'スプーン', japanese: 'スプーン', meaning: 'Sendok' },
@@ -820,8 +820,62 @@ const chapter12Words: VocabularyItem[] = [
   { id: 774, reading: 'めいしょ', japanese: '名所', meaning: 'Tempat terkenal' },
 ];
 
+const chapter13Words: VocabularyItem[] = [
+  { id: 775, reading: 'あそびます', japanese: '遊びます', meaning: 'Bermain' },
+  { id: 776, reading: 'およぎます', japanese: '泳ぎます', meaning: 'Berenang' },
+  { id: 777, reading: 'むかえます', japanese: '迎えます', meaning: 'Menjemput' },
+  { id: 778, reading: 'つかれます', japanese: '疲れます', meaning: 'Lelah' },
+  { id: 779, reading: 'けっこんします', japanese: '結婚します', meaning: 'Menikah' },
+  { id: 780, reading: 'かいものします', japanese: '買い物します', meaning: 'Berbelanja' },
+  { id: 781, reading: 'しょくじします', japanese: '食事します', meaning: 'Makan bersama' },
+  { id: 782, reading: 'さんぽします', japanese: '散歩します', meaning: 'Jalan-jalan' },
+  { id: 783, reading: 'たいへん（な）', japanese: '大変な', meaning: 'Susah, berat' },
+  { id: 784, reading: 'ほしい', japanese: '欲しい', meaning: 'Ingin' },
+  { id: 785, reading: 'ひろい', japanese: '広い', meaning: 'Luas' },
+  { id: 786, reading: 'せまい', japanese: '狭い', meaning: 'Sempit' },
+  { id: 787, reading: 'プール', japanese: 'プール', meaning: 'Kolam renang' },
+  { id: 788, reading: 'かわ', japanese: '川', meaning: 'Sungai' },
+  { id: 789, reading: 'びじゅつ', japanese: '美術', meaning: 'Seni' },
+  { id: 790, reading: 'つり', japanese: '釣り', meaning: 'Pancing , memancing' },
+  { id: 791, reading: 'スキー', japanese: 'スキー', meaning: 'Ski' },
+  { id: 792, reading: 'しゅうまつ', japanese: '週末', meaning: 'Akhir pekan' },
+  { id: 793, reading: 'おしょうがつ', japanese: 'お正月', meaning: 'Tahun baru' },
+  { id: 794, reading: '～ごろ', japanese: '～ごろ', meaning: 'Kira-kira , sekitar' },
+  { id: 795, reading: 'なにか', japanese: '何か', meaning: 'Sesuatu' },
+  { id: 796, reading: 'どこか', japanese: 'どこか', meaning: 'Suatu tempat' },
+  { id: 797, reading: 'のどがかわきます', japanese: 'のどがかわきます', meaning: 'Haus' },
+  { id: 798, reading: 'おなかがすきます', japanese: 'おなかがすきます', meaning: 'Lapar' },
+  { id: 799, reading: 'そうしましょう', japanese: 'そうしましょう', meaning: 'Ya ayo' },
+  { id: 800, reading: 'ごちゅうもんは', japanese: 'ご注文は', meaning: 'Mau pesan apa?' },
+  { id: 801, reading: 'おまちください', japanese: 'お待ちください', meaning: 'Tunggu sebentar' },
+  { id: 802, reading: 'べつべつに', japanese: '別々に', meaning: 'Sendiri-sendiri / masing-masing' },
+  { id: 803, reading: 'はくぶつかん', japanese: '博物館', meaning: 'Museum' },
+  { id: 804, reading: 'びじゅつかん', japanese: '美術館', meaning: 'Gedung kesenian' },
+  { id: 805, reading: 'としょかん', japanese: '図書館', meaning: 'Perpustakaan' },
+  { id: 806, reading: 'えいがかん', japanese: '映画館', meaning: 'Bioskop' },
+  { id: 807, reading: 'どうぶつえん', japanese: '動物園', meaning: 'Kebun binatang' },
+  { id: 808, reading: 'しょくぶつえん', japanese: '植物園', meaning: 'Kebun raya' },
+  { id: 809, reading: 'おてら', japanese: 'お寺', meaning: 'Kuil budha' },
+  { id: 810, reading: 'じんじゃ', japanese: '神社', meaning: 'Kuil sinto' },
+  { id: 811, reading: 'きょうかい', japanese: '教会', meaning: 'Gereja' },
+  { id: 812, reading: 'たいしかん', japanese: '体育館', meaning: 'Kedutaan besar' },
+  { id: 813, reading: 'にゅうこくかんりきょく', japanese: '入国管理局', meaning: 'Kantor imigrasi' },
+  { id: 814, reading: 'しやくしょ', japanese: '市役所', meaning: 'Kantor balaikota' },
+  { id: 815, reading: 'こうばん', japanese: '交番', meaning: 'Pos polisi' },
+  { id: 816, reading: 'ちゅうしゃじょう', japanese: '駐車場', meaning: 'Tempat parkir' },
+  { id: 817, reading: 'だいがく', japanese: '大学', meaning: 'Universitas' },
+  { id: 818, reading: 'こうこう', japanese: '高校', meaning: 'Sma' },
+  { id: 819, reading: 'ちゅうがっこう', japanese: '中学校', meaning: 'Smp' },
+  { id: 820, reading: 'しょうがっこう', japanese: '小学校', meaning: 'Sd' },
+  { id: 821, reading: 'ようちえん', japanese: '幼稚園', meaning: 'Tk' },
+  { id: 822, reading: 'にくや', japanese: '肉屋', meaning: 'Toko daging' },
+  { id: 823, reading: 'パンや', japanese: 'パンや', meaning: 'Toko roti' },
+  { id: 824, reading: 'さかなや', japanese: '魚屋', meaning: 'Toko ikan' },
+  { id: 825, reading: 'やおや', japanese: '八百屋', meaning: 'Toko sayuran' },
+];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words, ...chapter8Words, ...chapter9Words, ...chapter10Words, ...chapter11Words, ...chapter12Words];
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words, ...chapter8Words, ...chapter9Words, ...chapter10Words, ...chapter11Words, ...chapter12Words, ...chapter13Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
@@ -838,6 +892,7 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   if (chapterNumber === 10) words = chapter10Words;
   if (chapterNumber === 11) words = chapter11Words;
   if (chapterNumber === 12) words = chapter12Words;
+  if (chapterNumber === 13) words = chapter13Words;
 
   return {
     chapter: chapterNumber,
@@ -847,4 +902,5 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
 
 // For practice page, we can provide a flat list for simplicity of random selection
 export const vocabularyList: VocabularyItem[] = allWords;
+
 
