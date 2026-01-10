@@ -58,9 +58,11 @@ export async function checkAnswer(
     ? wanakana.toKatakana(rawUserAnswer, { passRomaji: true })
     : wanakana.toHiragana(rawUserAnswer, { passRomaji: true });
 
-  const isCorrect =
-    userAnswer === cleanExpectedAnswer ||
-    (cleanExpectedAnswerKanji !== '' && userAnswer === cleanExpectedAnswerKanji);
+  const isCorrectAsReading = userAnswer === cleanExpectedAnswer;
+  const hasDistinctKanji = cleanExpectedAnswerKanji && cleanExpectedAnswerKanji !== cleanExpectedAnswer;
+  const isCorrectAsKanji = hasDistinctKanji && userAnswer === cleanExpectedAnswerKanji;
+
+  const isCorrect = isCorrectAsReading || isCorrectAsKanji;
 
   if (isCorrect) {
     return {
