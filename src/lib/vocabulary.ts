@@ -677,7 +677,7 @@ const chapter10Words: VocabularyItem[] = [
   { id: 637, reading: 'そと', japanese: '外', meaning: 'Luar' },
   { id: 638, reading: 'となり', japanese: '隣', meaning: 'Samping / sebelah' },
   { id: 639, reading: 'ちかく', japanese: '近く', meaning: 'Dekat' },
-  { id: 40, reading: 'あいだ', japanese: '間', meaning: 'Antara' },
+  { id: 640, reading: 'あいだ', japanese: '間', meaning: 'Antara' },
   { id: 641, reading: 'どうもすみません', japanese: 'どうもすみません', meaning: 'Maaf / terima kasih banyak' },
   { id: 642, reading: 'ナンプラー', japanese: 'ナンプラー', meaning: 'Kecap ikan' },
   { id: 643, reading: 'コーナー', japanese: 'コーナー', meaning: 'Tempat / bagian penjualan' },
@@ -777,8 +777,51 @@ const chapter11Words: VocabularyItem[] = [
   { id: 734, reading: 'コーラ', japanese: 'コーラ', meaning: 'Coca cola' },
 ];
 
+const chapter12Words: VocabularyItem[] = [
+  { id: 735, reading: 'かんたん（な）', japanese: '簡単な', meaning: 'Mudah, gampang' },
+  { id: 736, reading: 'ちかい', japanese: '近い', meaning: 'Dekat' },
+  { id: 737, reading: 'とおい', japanese: '遠い', meaning: 'Jauh' },
+  { id: 738, reading: 'はやい', japanese: '早い，速い', meaning: 'Cepat' },
+  { id: 739, reading: 'おそい', japanese: '遅い', meaning: 'Lambat' },
+  { id: 740, reading: 'おおい', japanese: '多い', meaning: 'Banyak' },
+  { id: 741, reading: 'すくない', japanese: '少ない', meaning: 'Sedikit' },
+  { id: 742, reading: 'あたたかい', japanese: '暖かい、温かい', meaning: 'Hangat' },
+  { id: 743, reading: 'すずしい', japanese: '涼しい', meaning: 'Sejuk' },
+  { id: 744, reading: 'あまい', japanese: '甘い', meaning: 'Manis' },
+  { id: 745, reading: 'からい', japanese: '辛い', meaning: 'Pedas' },
+  { id: 746, reading: 'おもい', japanese: '重い', meaning: 'Berat' },
+  { id: 747, reading: 'かるい', japanese: '軽い', meaning: 'Ringan' },
+  { id: 748, reading: 'いい', japanese: 'いい', meaning: 'Lebih baik' },
+  { id: 749, reading: 'きせつ', japanese: '季節', meaning: 'Musim' },
+  { id: 750, reading: 'てんき', japanese: '天気', meaning: 'Cuaca' },
+  { id: 751, reading: 'あめ', japanese: '雨', meaning: 'Hujan' },
+  { id: 752, reading: 'ゆき', japanese: '雪', meaning: 'Salju' },
+  { id: 753, reading: 'くもり', japanese: '曇り', meaning: 'Mendung' },
+  { id: 754, reading: 'ホテル', japanese: 'ホテル', meaning: 'Hotel' },
+  { id: 755, reading: 'くうこう', japanese: '空港', meaning: 'Bandara' },
+  { id: 756, reading: 'うみ', japanese: '海', meaning: 'Laut' },
+  { id: 757, reading: 'せかい', japanese: '世界', meaning: 'Dunia' },
+  { id: 758, reading: 'パーティー', japanese: 'パーティー', meaning: 'Pesta' },
+  { id: 759, reading: 'まつり', japanese: '祭り', meaning: 'Perayaan' },
+  { id: 760, reading: 'レモン', japanese: 'レモン', meaning: 'Lemon' },
+  { id: 761, reading: 'いけばな', japanese: '生け花', meaning: 'Seni merangkai bunga' },
+  { id: 762, reading: 'もみじ', japanese: '紅葉', meaning: 'Maple' },
+  { id: 763, reading: 'どちら', japanese: 'どちら', meaning: 'Yang mana' },
+  { id: 764, reading: 'どちらも', japanese: 'どちらも', meaning: 'Dua-duanya / yang mana saja' },
+  { id: 765, reading: 'いちばん', japanese: 'いちばん', meaning: 'Yang paling' },
+  { id: 766, reading: 'ずっと', japanese: 'ずっと', meaning: 'Selamanya' },
+  { id: 767, reading: 'はじめて', japanese: '初めて', meaning: 'Pertama kali' },
+  { id: 768, reading: 'ただいま', japanese: 'ただいま', meaning: 'Saya pulang / saya kembali' },
+  { id: 769, reading: 'おかえりなさい', japanese: 'お帰りなさい', meaning: 'Sudah pulang ya...' },
+  { id: 770, reading: 'わあ、すごいひとですね', japanese: 'わあ、すごいひとですね', meaning: 'Wah...banyak orang' },
+  { id: 771, reading: 'つかれました', japanese: '疲れました', meaning: 'Capek / lelah' },
+  { id: 772, reading: 'ホンコン', japanese: 'ホンコン', meaning: 'Hongkong' },
+  { id: 773, reading: 'シンガポール', japanese: 'シンガポール', meaning: 'Singapura' },
+  { id: 774, reading: 'めいしょ', japanese: '名所', meaning: 'Tempat terkenal' },
+];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words, ...chapter8Words, ...chapter9Words, ...chapter10Words, ...chapter11Words];
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words, ...chapter8Words, ...chapter9Words, ...chapter10Words, ...chapter11Words, ...chapter12Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
@@ -794,6 +837,7 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   if (chapterNumber === 9) words = chapter9Words;
   if (chapterNumber === 10) words = chapter10Words;
   if (chapterNumber === 11) words = chapter11Words;
+  if (chapterNumber === 12) words = chapter12Words;
 
   return {
     chapter: chapterNumber,
@@ -803,3 +847,4 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
 
 // For practice page, we can provide a flat list for simplicity of random selection
 export const vocabularyList: VocabularyItem[] = allWords;
+
