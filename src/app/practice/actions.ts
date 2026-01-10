@@ -2,6 +2,7 @@
 
 import { validateJapaneseInput } from '@/ai/flows/validate-japanese-input';
 import { z } from 'zod';
+import * as wanakana from 'wanakana';
 
 const formSchema = z.object({
   userAnswer: z.string().trim(),
@@ -44,8 +45,10 @@ export async function checkAnswer(
 
     const { userAnswer, expectedAnswer, expectedAnswerKanji } = validatedFields.data;
 
-    // Direct check first (allow hiragana or kanji answer)
-    if (userAnswer === expectedAnswer || userAnswer === expectedAnswerKanji) {
+    // Check against hiragana reading and kanji
+    const isCorrect = userAnswer === expectedAnswer || (expectedAnswerKanji && userAnswer === expectedAnswerKanji);
+
+    if (isCorrect) {
       return {
         isValid: true,
         feedback: 'Benar! Jawaban kamu tepat.',
@@ -53,10 +56,10 @@ export async function checkAnswer(
       };
     }
 
-    // If not a direct match, use AI for validation
+    // If not a direct match, use AI for validation, comparing user's answer with the hiragana reading
     const result = await validateJapaneseInput({
-      userAnswer,
-      expectedAnswer: expectedAnswer, // Validate against the reading
+      userAnswer: userAnswer,
+      expectedAnswer: expectedAnswer,
     });
 
     if (result.isValid) {

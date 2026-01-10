@@ -7,30 +7,29 @@ interface JapaneseKeyboardProps {
   onKeyPress: (key: string) => void;
   onBackspace: () => void;
   onSubmit: () => void;
+  characterSet: string[];
 }
-
-const hiraganaLayout = [
-  ['あ', 'い', 'う', 'え', 'お'],
-  ['か', 'き', 'く', 'け', 'こ'],
-  ['さ', 'し', 'す', 'せ', 'そ'],
-  ['た', 'ち', 'つ', 'て', 'と'],
-  ['な', 'に', 'ぬ', 'ね', 'の'],
-  ['は', 'ひ', 'ふ', 'へ', 'ほ'],
-  ['ま', 'み', 'む', 'め', 'も'],
-  ['や', 'ゆ', 'よ'],
-  ['ら', 'り', 'る', 'れ', 'ろ'],
-  ['わ', 'を', 'ん', 'ー', 'っ'],
-];
 
 export function JapaneseKeyboard({
   onKeyPress,
   onBackspace,
   onSubmit,
+  characterSet,
 }: JapaneseKeyboardProps) {
+  // Create a 3x4 grid layout for the characters
+  const gridLayout = [];
+  const chars = [...characterSet];
+  for (let i = 0; i < 3; i++) {
+    const row = chars.slice(i * 4, i * 4 + 4);
+    if (row.length > 0) {
+      gridLayout.push(row);
+    }
+  }
+
   return (
-    <div className="w-full max-w-4xl mx-auto bg-card p-2 sm:p-4 rounded-lg shadow-md border">
+    <div className="w-full max-w-md mx-auto bg-card p-2 sm:p-4 rounded-lg shadow-md border">
       <div className="space-y-2">
-        {hiraganaLayout.map((row, rowIndex) => (
+        {gridLayout.map((row, rowIndex) => (
           <div key={rowIndex} className="flex justify-center gap-1 sm:gap-2">
             {row.map((char) => (
               <Button
@@ -47,7 +46,7 @@ export function JapaneseKeyboard({
       </div>
       <div className="mt-4 flex gap-2">
         <Button
-          variant="secondary"
+          variant="destructive"
           className="flex-1"
           onClick={onBackspace}
           aria-label="Backspace"
@@ -55,17 +54,10 @@ export function JapaneseKeyboard({
           <Delete className="h-5 w-5" />
         </Button>
         <Button
-          variant="secondary"
-          className="flex-1"
-          onClick={() => onKeyPress(' ')}
-        >
-          Spasi
-        </Button>
-        <Button
           className="flex-[2] bg-accent hover:bg-accent/90 text-accent-foreground"
           onClick={onSubmit}
         >
-          <Send className="mr-2 h-4 w-4" /> Kirim Jawaban
+          <Send className="mr-2 h-4 w-4" /> Kirim
         </Button>
       </div>
     </div>
