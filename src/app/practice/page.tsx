@@ -33,21 +33,15 @@ function getRandomItem(
   return item;
 }
 
-const staticCharacterSet = ['r', 'm', 't', 'p', 'e', 'c', 'n', 'h', 'z', 'd', 'a', 'u'];
-
 export default function PracticePage() {
   const [state, formAction] = useActionState(checkAnswer, initialState);
   const [currentWord, setCurrentWord] = useState<VocabularyItem | null>(null);
   const [romajiInput, setRomajiInput] = useState('');
-  const [characterSet, setCharacterSet] = useState<string[]>([]);
   const hiraganaOutput = useMemo(() => wanakana.toHiragana(romajiInput), [romajiInput]);
 
   useEffect(() => {
     const newWord = getRandomItem(vocabularyList);
     setCurrentWord(newWord);
-    // Shuffle the static character set for each new word
-    const shuffledChars = [...staticCharacterSet].sort(() => Math.random() - 0.5);
-    setCharacterSet(shuffledChars);
   }, []);
 
   const handleKeyPress = (key: string) => {
@@ -65,9 +59,6 @@ export default function PracticePage() {
   const handleNextQuestion = () => {
     const newWord = getRandomItem(vocabularyList, currentWord!);
     setCurrentWord(newWord);
-    // Reshuffle characters for the new question
-    const shuffledChars = [...staticCharacterSet].sort(() => Math.random() - 0.5);
-    setCharacterSet(shuffledChars);
     setRomajiInput('');
     // Reset form state
     const currentForm = formRef.current;
@@ -171,7 +162,6 @@ export default function PracticePage() {
           onKeyPress={handleKeyPress}
           onBackspace={handleBackspace}
           onSubmit={handleSubmitFromKeyboard}
-          characterSet={characterSet}
         />
       )}
     </div>

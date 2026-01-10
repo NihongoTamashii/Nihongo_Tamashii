@@ -7,35 +7,37 @@ interface JapaneseKeyboardProps {
   onKeyPress: (key: string) => void;
   onBackspace: () => void;
   onSubmit: () => void;
-  characterSet: string[];
 }
+
+const qwertyLayout = [
+  ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+  ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+];
 
 export function JapaneseKeyboard({
   onKeyPress,
   onBackspace,
   onSubmit,
-  characterSet,
 }: JapaneseKeyboardProps) {
-  // Create a 3x4 grid layout for the characters
-  const gridLayout = [];
-  const chars = [...characterSet];
-  for (let i = 0; i < 3; i++) {
-    const row = chars.slice(i * 4, i * 4 + 4);
-    if (row.length > 0) {
-      gridLayout.push(row);
-    }
-  }
-
   return (
-    <div className="w-full max-w-md mx-auto bg-card p-2 sm:p-4 rounded-lg shadow-md border">
-      <div className="space-y-2">
-        {gridLayout.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex justify-center gap-1 sm:gap-2">
+    <div className="w-full max-w-2xl mx-auto bg-card p-2 sm:p-4 rounded-lg shadow-md border">
+      <div className="space-y-1 sm:space-y-2">
+        {qwertyLayout.map((row, rowIndex) => (
+          <div
+            key={rowIndex}
+            className="flex justify-center gap-1 sm:gap-2"
+            style={{
+              // Add padding for rows that are not full width to center them
+              paddingLeft: `${rowIndex * 15}px`,
+              paddingRight: `${rowIndex * 15}px`,
+            }}
+          >
             {row.map((char) => (
               <Button
                 key={char}
                 variant="outline"
-                className="flex-1 text-lg sm:text-2xl font-body p-0 h-12 sm:h-14"
+                className="flex-1 text-lg sm:text-xl font-body p-0 h-11 sm:h-12"
                 onClick={() => onKeyPress(char)}
               >
                 {char}
