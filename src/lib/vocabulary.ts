@@ -404,8 +404,86 @@ const chapter6Words: VocabularyItem[] = [
   { id: 376, reading: 'こめ', japanese: 'こめ', meaning: 'Beras' },
 ];
 
+const chapter7Words: VocabularyItem[] = [
+  { id: 377, reading: 'きります', japanese: '切ります', meaning: 'Memotong / menggunting' },
+  { id: 378, reading: 'おくります', japanese: '送ります', meaning: 'Mengirim' },
+  { id: 379, reading: 'あげます', japanese: 'あげます', meaning: 'Memberikan' },
+  { id: 380, reading: 'もらいます', japanese: 'もらいます', meaning: 'Menerima / mendapatkan' },
+  { id: 381, reading: 'かします', japanese: '貸します', meaning: 'Meminjamkan / menyewakan' },
+  { id: 382, reading: 'かります', japanese: '借ります', meaning: 'Meminjam / menyewa' },
+  { id: 383, reading: 'おしえます', japanese: '教えます', meaning: 'Mengajar' },
+  { id: 384, reading: 'ならいます', japanese: '習います', meaning: 'Belajar (kepada)' },
+  { id: 385, reading: 'かけます', japanese: '（を）', meaning: 'Menelpon' },
+  { id: 386, reading: 'て', japanese: '手', meaning: 'Tangan' },
+  { id: 387, reading: 'はし', japanese: 'はし', meaning: 'Sumpit' },
+  { id: 388, reading: 'スプーン', japanese: 'スプーン', meaning: 'Sendok' },
+  { id: 389, reading: 'ナイフ', japanese: 'ナイフ', meaning: 'Pisau' },
+  { id: 390, reading: 'フォーク', japanese: 'フォーク', meaning: 'Garpu' },
+  { id: 391, reading: 'はさみ', japanese: 'はさみ', meaning: 'Gunting' },
+  { id: 392, reading: 'パソコン', japanese: 'パソコン', meaning: 'Laptop' },
+  { id: 393, reading: 'ケータイ', japanese: 'ケータイ', meaning: 'HP' },
+  { id: 394, reading: 'メール', japanese: 'メール', meaning: 'Email' },
+  { id: 395, reading: 'ねんがじょう', japanese: '年賀状', meaning: 'Kartu tahun baru' },
+  { id: 396, reading: 'パンチ', japanese: 'パンチ', meaning: 'Pelubang kertas' },
+  { id: 397, reading: 'ホッチキス', japanese: 'ホッチキス', meaning: 'Stapler' },
+  { id: 398, reading: 'セロテープ', japanese: 'セロテープ', meaning: 'Selotip' },
+  { id: 399, reading: 'けしゴム', japanese: '消しゴム', meaning: 'Penghapus karet' },
+  { id: 400, reading: 'かみ', japanese: '紙', meaning: 'Kertas' },
+  { id: 401, reading: 'はな', japanese: '花', meaning: 'Bunga' },
+  { id: 402, reading: 'シャツ', japanese: 'シャツ', meaning: 'Kemeja' },
+  { id: 403, reading: 'プレゼント', japanese: 'プレゼント', meaning: 'Hadiah / kado' },
+  { id: 404, reading: 'にもつ', japanese: '荷物', meaning: 'Barang' },
+  { id: 405, reading: 'おかね', japanese: 'お金', meaning: 'Uang' },
+  { id: 406, reading: 'きっぷ', japanese: '切符', meaning: 'Karcis' },
+  { id: 407, reading: 'クリスマス', japanese: 'クリスマス', meaning: 'Natal' },
+  { id: 408, reading: 'ちち', japanese: '父', meaning: 'Ayah' },
+  { id: 409, reading: 'はは', japanese: '母', meaning: 'Ibu' },
+  { id: 410, reading: 'おとうさん', japanese: 'お父さん', meaning: 'Ayah orang lain' },
+  { id: 411, reading: 'おかあさん', japanese: 'お母さん', meaning: 'Ibu orang lain' },
+  { id: 412, reading: 'もう', japanese: 'もう', meaning: 'Sudah' },
+  { id: 413, reading: 'まだ', japanese: 'まだ', meaning: 'Belum' },
+  { id: 414, reading: 'これから', japanese: 'これから', meaning: 'Mulai dari sekarang' },
+  { id: 415, reading: 'すてきですね', japanese: 'すてきですね', meaning: 'Bagus ya / indah ya' },
+  { id: 416, reading: 'いらっしゃい', japanese: 'いらっしゃい', meaning: 'Selamat datang' },
+  { id: 417, reading: 'どうぞおあがりください', japanese: 'どうぞおあがりください', meaning: 'Silakan masuk' },
+  { id: 418, reading: 'しつれいします', japanese: '失礼します', meaning: 'Permisi' },
+  { id: 419, reading: '～いかがですか', japanese: '～いかがですか', meaning: 'Bagaimana ? (menawarkan sesuatu kepada orang)' },
+  { id: 420, reading: 'いただきます', japanese: 'いただきます', meaning: 'Selamat makan' },
+  { id: 421, reading: 'ごちそうさまでした', japanese: 'ごちそうさまでした', meaning: 'Terima kasih atas hidangannya' },
+  { id: 422, reading: 'スペイン', japanese: 'スペイン', meaning: 'Spanyol' },
+  { id: 423, reading: 'かぞく', japanese: '家族', meaning: 'Keluarga' },
+  { id: 424, reading: 'そぼ', japanese: '祖母', meaning: 'Nenek' },
+  { id: 425, reading: 'そふ', japanese: '祖父', meaning: 'Kakek' },
+  { id: 426, reading: 'そふぼ', japanese: '祖父母', meaning: 'Kakek nenek' },
+  { id: 427, reading: 'りょうしん', japanese: '両親', meaning: 'Orang tua' },
+  { id: 428, reading: 'いもうと', japanese: '妹', meaning: 'Adik perempuan' },
+  { id: 429, reading: 'おとうと', japanese: '弟', meaning: 'Adik laki-laki' },
+  { id: 430, reading: 'あね', japanese: '姉', meaning: 'Kakak perempuan' },
+  { id: 431, reading: 'あに', japanese: '兄', meaning: 'Kakak laki-laki' },
+  { id: 432, reading: 'きょうだい', japanese: '兄弟', meaning: 'Saudara kandung' },
+  { id: 433, reading: 'つま', japanese: '妻', meaning: 'Istri' },
+  { id: 434, reading: 'おっと', japanese: '夫', meaning: 'Suami' },
+  { id: 435, reading: 'ふうふ', japanese: '夫婦', meaning: 'Pasangan suami istri' },
+  { id: 436, reading: 'むすめ', japanese: '娘', meaning: 'Anak perempuan' },
+  { id: 437, reading: 'むすこ', japanese: '息子', meaning: 'Anak laki-laki' },
+  { id: 438, reading: 'こども', japanese: '子供', meaning: 'Anak' },
+  { id: 439, reading: 'おばあさん', japanese: 'おばあさん', meaning: 'Nenek (orang lain)' },
+  { id: 440, reading: 'おじいさん', japanese: 'おじいさん', meaning: 'Kakek (orang lain)' },
+  { id: 441, reading: 'ごりょうしん', japanese: 'ごりょうしん', meaning: 'Orang tua (orang lain)' },
+  { id: 442, reading: 'いもうとさん', japanese: 'いもうとさん', meaning: 'Adik perempuan (orang lain)' },
+  { id: 443, reading: 'おとうとさん', japanese: 'おとうとさん', meaning: 'Adik laki-laki (orang lain)' },
+  { id: 444, reading: 'おねえさん', japanese: 'おねえさん', meaning: 'Kakak perempuan (orang lain)' },
+  { id: 445, reading: 'おにいさん', japanese: 'おにいさん', meaning: 'Kakak laki-laki (orang lain)' },
+  { id: 446, 'reading': 'ごきょうだい', 'japanese': 'ごきょうだい', 'meaning': 'Saudara kandung (orang lain)' },
+  { id: 447, 'reading': 'おくさん', 'japanese': 'おくさん', 'meaning': 'Istri (orang lain)' },
+  { id: 448, 'reading': 'ごふうふ', 'japanese': 'ごふうふ', 'meaning': 'Pasangan suami istri (orang lain)' },
+  { id: 449, 'reading': 'むすめさん', 'japanese': 'むすめさん', 'meaning': 'Anak perempuan (orang lain)' },
+  { id: 450, 'reading': 'むすこさん', 'japanese': 'むすこさん', 'meaning': 'Anak laki-laki (orang lain)' },
+  { id: 451, 'reading': 'おこさん', 'japanese': 'おこさん', 'meaning': 'Anak (orang lain)' },
+];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words];
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
@@ -416,6 +494,7 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   if (chapterNumber === 4) words = chapter4Words;
   if (chapterNumber === 5) words = chapter5Words;
   if (chapterNumber === 6) words = chapter6Words;
+  if (chapterNumber === 7) words = chapter7Words;
 
   return {
     chapter: chapterNumber,
