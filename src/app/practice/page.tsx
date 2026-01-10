@@ -34,31 +34,7 @@ function getRandomItem(
   return item;
 }
 
-function getCharacterSet(reading: string): string[] {
-  const hiragana = wanakana.toHiragana(reading);
-  const uniqueChars = new Set(wanakana.toRomaji(hiragana).replace(/[^a-z]/gi, ''));
-  // Add some distractors
-  const distractors = "abcdefghijklmnopqrstuvwxyz".split('').filter(c => !uniqueChars.has(c));
-  // shuffle distractors
-  for (let i = distractors.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [distractors[i], distractors[j]] = [distractors[j], distractors[i]];
-  }
-  
-  while(uniqueChars.size < 12) {
-    uniqueChars.add(distractors.pop()!);
-  }
-
-  const charArray = Array.from(uniqueChars);
-
-  // Shuffle the array
-  for (let i = charArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [charArray[i], charArray[j]] = [charArray[j], charArray[i]];
-  }
-
-  return charArray.slice(0, 12);
-}
+const staticCharacterSet = ['r', 'm', 't', 'p', 'e', 'c', 'n', 'h', 'z', 'd', 'a', 'u'];
 
 export default function PracticePage() {
   const [state, formAction] = useFormState(checkAnswer, initialState);
@@ -70,7 +46,9 @@ export default function PracticePage() {
   useEffect(() => {
     const newWord = getRandomItem(vocabularyList);
     setCurrentWord(newWord);
-    setCharacterSet(getCharacterSet(newWord.reading));
+    // Shuffle the static character set for each new word
+    const shuffledChars = [...staticCharacterSet].sort(() => Math.random() - 0.5);
+    setCharacterSet(shuffledChars);
   }, []);
 
   const handleKeyPress = (key: string) => {
@@ -88,7 +66,9 @@ export default function PracticePage() {
   const handleNextQuestion = () => {
     const newWord = getRandomItem(vocabularyList, currentWord!);
     setCurrentWord(newWord);
-    setCharacterSet(getCharacterSet(newWord.reading));
+    // Reshuffle characters for the new question
+    const shuffledChars = [...staticCharacterSet].sort(() => Math.random() - 0.5);
+    setCharacterSet(shuffledChars);
     setRomajiInput('');
     // Reset form state
     const currentForm = formRef.current;
