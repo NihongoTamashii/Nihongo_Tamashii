@@ -186,19 +186,21 @@ export default function LearnPage() {
                   Pilih Bab ({selectedChapters.length})
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 max-h-80 overflow-y-auto">
+              <DropdownMenuContent className="w-64 max-h-80 overflow-y-auto">
                 <DropdownMenuLabel>Pilih Bab untuk Dipelajari</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                {chapters.map((chapter) => (
-                  <DropdownMenuCheckboxItem
-                    key={chapter.chapter}
-                    checked={selectedChapters.includes(chapter.chapter)}
-                    onSelect={(e) => e.preventDefault()}
-                    onClick={() => handleChapterSelection(chapter.chapter)}
-                  >
-                    Bab {chapter.chapter}
-                  </DropdownMenuCheckboxItem>
-                ))}
+                {chapters
+                  .filter((chapter) => chapter.words.length > 0)
+                  .map((chapter) => (
+                    <DropdownMenuCheckboxItem
+                      key={chapter.chapter}
+                      checked={selectedChapters.includes(chapter.chapter)}
+                      onSelect={(e) => e.preventDefault()}
+                      onClick={() => handleChapterSelection(chapter.chapter)}
+                    >
+                      Bab {chapter.chapter} ({chapter.words.length} Kosakata)
+                    </DropdownMenuCheckboxItem>
+                  ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
