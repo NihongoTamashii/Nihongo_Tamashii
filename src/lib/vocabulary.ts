@@ -635,8 +635,66 @@ const chapter9Words: VocabularyItem[] = [
   { id: 598, reading: 'すいえい', japanese: '水泳', meaning: 'Renang' },
 ];
 
+const chapter10Words: VocabularyItem[] = [
+  { id: 599, reading: 'あります', japanese: 'あります', meaning: 'Ada (benda mati)' },
+  { id: 600, reading: 'います', japanese: 'います', meaning: 'Ada (benda hidup)' },
+  { id: 601, reading: 'いろいろ（な）', japanese: 'いろいろ（な）', meaning: 'Berbagai / macam-macam' },
+  { id: 602, reading: 'おとこのひと', japanese: '男の人', meaning: 'Orang laki-laki' },
+  { id: 603, reading: 'おんなのひと', japanese: '女の人', meaning: 'Orang perempuan' },
+  { id: 604, reading: 'おとこのこ', japanese: '男の子', meaning: 'Anak laki-laki' },
+  { id: 605, reading: 'おんなのこ', japanese: '女の子', meaning: 'Anak perempuan' },
+  { id: 606, reading: 'いぬ', japanese: '犬', meaning: 'Anjing' },
+  { id: 607, reading: 'ねこ', japanese: '猫', meaning: 'Kucing' },
+  { id: 608, reading: 'パンダ', japanese: 'パンダ', meaning: 'Panda' },
+  { id: 609, reading: 'ぞう', japanese: '象', meaning: 'Gajah' },
+  { id: 610, reading: 'き', japanese: '木', meaning: 'Pohon' },
+  { id: 611, reading: 'もの', japanese: '物', meaning: 'Barang' },
+  { id: 612, reading: 'でんち', japanese: '電池', meaning: 'Baterai' },
+  { id: 613, reading: 'はこ', japanese: '箱', meaning: 'Kotak' },
+  { id: 614, reading: 'スイッチ', japanese: 'スイッチ', meaning: 'Saklar' },
+  { id: 615, reading: 'れいぞうこ', japanese: '冷蔵庫', meaning: 'Kulkas' },
+  { id: 616, reading: 'テーブル', japanese: 'テーブル', meaning: 'Meja makan' },
+  { id: 617, reading: 'ベッド', japanese: 'ベッド', meaning: 'Tempat tidur' },
+  { id: 618, reading: 'たな', japanese: '棚', meaning: 'Lemari' },
+  { id: 619, reading: 'ドア', japanese: 'ドア', meaning: 'Pintu' },
+  { id: 620, reading: 'まど', japanese: '窓', meaning: 'Jendela' },
+  { id: 621, reading: 'ポスト', japanese: 'ポスト', meaning: 'Kotak surat' },
+  { id: 622, reading: 'ビル', japanese: 'ビル', meaning: 'Gedung' },
+  { id: 623, reading: 'ＡＴＭ', japanese: 'ＡＴＭ', meaning: 'Atm' },
+  { id: 624, reading: 'コンビニ', japanese: 'コンビニ', meaning: 'Toko 24 jam' },
+  { id: 625, reading: 'こうえん', japanese: '公園', meaning: 'Taman' },
+  { id: 626, reading: 'きっさてん', japanese: '喫茶店', meaning: 'Coffe shop / cafe' },
+  { id: 627, reading: '～や', japanese: '～屋', meaning: 'Toko ~' },
+  { id: 628, reading: 'のりば', japanese: '乗り場', meaning: 'Tempat naik' },
+  { id: 629, reading: 'けん', japanese: '県', meaning: 'Prefektur' },
+  { id: 630, reading: 'うえ', japanese: '上', meaning: 'Atas' },
+  { id: 631, reading: 'した', japanese: '下', meaning: 'Bawah' },
+  { id: 632, reading: 'まえ', japanese: '前', meaning: 'Depan' },
+  { id: 633, reading: 'うしろ', japanese: '後ろ', meaning: 'Belakang' },
+  { id: 634, reading: 'みぎ', japanese: '右', meaning: 'Kanan' },
+  { id: 635, reading: 'ひだり', japanese: '左', meaning: 'Kiri' },
+  { id: 636, reading: 'なか', japanese: '中', meaning: 'Dalam' },
+  { id: 637, reading: 'そと', japanese: '外', meaning: 'Luar' },
+  { id: 638, reading: 'となり', japanese: '隣', meaning: 'Samping / sebelah' },
+  { id: 639, reading: 'ちかく', japanese: '近く', meaning: 'Dekat' },
+  { id: 640, reading: 'あいだ', japanese: '間', meaning: 'Antara' },
+  { id: 641, reading: 'どうもすみません', japanese: 'どうもすみません', meaning: 'Maaf / terima kasih banyak' },
+  { id: 642, reading: 'ナンプラー', japanese: 'ナンプラー', meaning: 'Kecap ikan' },
+  { id: 643, reading: 'コーナー', japanese: 'コーナー', meaning: 'Tempat / bagian penjualan' },
+  { id: 644, reading: 'いちばんした', japanese: '一番下', meaning: 'Paling bawah' },
+  { id: 645, reading: 'げんかん', japanese: '玄関', meaning: 'Pintu masuk' },
+  { id: 646, reading: 'ふろば', japanese: '風呂場', meaning: 'Kamar mandi' },
+  { id: 647, reading: 'せんめんじょ', japanese: '洗面所', meaning: 'Tempat cuci tangan' },
+  { id: 648, reading: 'だいどころ', japanese: '台所', meaning: 'Dapur' },
+  { id: 649, reading: 'しょくどう', japanese: '食堂', meaning: 'Kantin / ruang makan' },
+  { id: 650, reading: 'いま', japanese: '居間', meaning: 'Ruang tamu' },
+  { id: 651, reading: 'しんしつ', japanese: '寝室', meaning: 'Kamar tidur' },
+  { id: 652, reading: 'ろうか', japanese: '廊下', meaning: 'Koridor' },
+  { id: 653, reading: 'ベランダ', japanese: 'ベランダ', meaning: 'teras' },
+];
 
-const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words, ...chapter8Words, ...chapter9Words];
+
+const allWords: VocabularyItem[] = [...chapter1Words, ...chapter2Words, ...chapter3Words, ...chapter4Words, ...chapter5Words, ...chapter6Words, ...chapter7Words, ...chapter8Words, ...chapter9Words, ...chapter10Words];
 
 export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   const chapterNumber = i + 1;
@@ -650,6 +708,7 @@ export const chapters: Chapter[] = Array.from({ length: 50 }, (_, i) => {
   if (chapterNumber === 7) words = chapter7Words;
   if (chapterNumber === 8) words = chapter8Words;
   if (chapterNumber === 9) words = chapter9Words;
+  if (chapterNumber === 10) words = chapter10Words;
 
   return {
     chapter: chapterNumber,
