@@ -43,22 +43,14 @@ export async function checkAnswer(
     };
   }
 
-  // Convert romaji to kana, just in case user types in romaji
   const userAnswerAsKana = wanakana.toKana(userAnswer.toLowerCase());
 
-  // Clean the expected answers by removing the '~' prefix if it exists
   const cleanExpectedReading = expectedReading.startsWith('～')
     ? expectedReading.substring(1)
     : expectedReading;
-  const cleanExpectedJapanese = expectedJapanese.startsWith('～')
-    ? expectedJapanese.substring(1)
-    : expectedJapanese;
 
-  // The answer is correct if the user's input (converted to kana) matches either
-  // the reading (hiragana/katakana) or the Japanese form (which might include kanji).
-  const isCorrect =
-    userAnswerAsKana === cleanExpectedReading ||
-    userAnswerAsKana === cleanExpectedJapanese;
+  // Only check against the reading (kana)
+  const isCorrect = userAnswerAsKana === cleanExpectedReading;
 
   if (isCorrect) {
     return {
@@ -67,9 +59,15 @@ export async function checkAnswer(
       isError: false,
     };
   } else {
+    // Construct the correct answer string for feedback
+    const correctAnswerString =
+      expectedReading !== expectedJapanese
+        ? `${expectedReading} (${expectedJapanese})`
+        : expectedReading;
+
     return {
       isValid: false,
-      feedback: 'Jawaban kurang tepat, coba periksa kembali.',
+      feedback: `Jawaban kurang tepat, coba periksa kembali. Jawaban yang benar: ${correctAnswerString}`,
       isError: false,
     };
   }
