@@ -45,29 +45,32 @@ export async function checkAnswer(
 
   const userAnswerAsKana = wanakana.toKana(userAnswer.toLowerCase());
 
+  // Handle answers like `～ちゃん` where user might just type `ちゃん`
   const cleanExpectedReading = expectedReading.startsWith('～')
     ? expectedReading.substring(1)
     : expectedReading;
 
-  // Only check against the reading (kana)
+  // Primary check against the reading (kana)
   const isCorrect = userAnswerAsKana === cleanExpectedReading;
 
   if (isCorrect) {
-    return {
-      isValid: true,
-      feedback: 'Benar! Jawaban kamu tepat.',
-      isError: false,
-    };
-  } else {
-    // Construct the correct answer string for feedback
     const correctAnswerString =
       expectedReading !== expectedJapanese
         ? `${expectedReading} (${expectedJapanese})`
         : expectedReading;
-
+    return {
+      isValid: true,
+      feedback: `Jawaban yang benar adalah: ${correctAnswerString}`,
+      isError: false,
+    };
+  } else {
+    const correctAnswerString =
+      expectedReading !== expectedJapanese
+        ? `${expectedReading} (${expectedJapanese})`
+        : expectedReading;
     return {
       isValid: false,
-      feedback: `Jawaban kurang tepat, coba periksa kembali. Jawaban yang benar: ${correctAnswerString}`,
+      feedback: `Jawaban kurang tepat. Jawaban yang benar: ${correctAnswerString}`,
       isError: false,
     };
   }

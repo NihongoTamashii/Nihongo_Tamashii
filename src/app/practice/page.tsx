@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Progress } from '@/components/ui/progress';
 import {
   CheckCircle2,
   XCircle,
@@ -15,7 +16,8 @@ import {
   BookCheck,
   Play,
   Settings,
-  Send
+  Send,
+  RotateCcw
 } from 'lucide-react';
 import { checkAnswer, type FormState } from './actions';
 import {
@@ -34,67 +36,61 @@ const initialState: FormState = {
   isError: false,
 };
 
-function getRandomItem(
-  arr: VocabularyItem[],
-  exclude?: VocabularyItem
-): VocabularyItem {
-  let item;
-  do {
-    item = arr[Math.floor(Math.random() * arr.length)];
-  } while (exclude && item.id === exclude.id);
-  return item;
-}
-
 export default function PracticePage() {
   const [state, formAction] = useActionState(checkAnswer, initialState);
+  
+  // Session State
+  const [selectedChapters, setSelectedChapters] = useState<number[]>([1]);
+  const [isSessionStarted, setIsSessionStarted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [sessionCompleted, setSessionCompleted] = useState(false);
+
+  // Word & Answer State
   const [currentWord, setCurrentWord] = useState<VocabularyItem | null>(null);
   const [userAnswer, setUserAnswer] = useState('');
   
-  const [selectedChapters, setSelectedChapters] = useState<number[]>([1]);
-  const [vocabularyList, setVocabularyList] = useState<VocabularyItem[]>([]);
-  const [isSessionStarted, setIsSessionStarted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // Question Deck State
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [questionsAnswered, setQuestionsAnswered] = useState(0);
+  const [remainingWords, setRemainingWords] = useState<VocabularyItem[]>([]);
+  const incorrectWordsRef = useRef<VocabularyItem[]>([]);
 
-  useEffect(() => {
-    if (isSessionStarted) {
-      setIsLoading(true);
-      const words = chapters
-        .filter((c) => selectedChapters.includes(c.chapter))
-        .flatMap((c) => c.words);
-      setVocabularyList(words);
-      if (words.length > 0) {
-        setCurrentWord(getRandomItem(words));
-      } else {
-        setCurrentWord(null);
-      }
-      setIsLoading(false);
+
+  const startNewSession = useCallback(() => {
+    setIsLoading(true);
+    const words = chapters
+      .filter((c) => selectedChapters.includes(c.chapter))
+      .flatMap((c) => c.words);
+
+    const shuffledWords = [...words].sort(() => Math.random() - 0.5);
+    
+    setRemainingWords(shuffledWords);
+    incorrectWordsRef.current = [];
+    
+    setTotalQuestions(shuffledWords.length);
+    setQuestionsAnswered(0);
+    
+    if (shuffledWords.length > 0) {
+      setCurrentWord(shuffledWords[0]);
+    } else {
+      setCurrentWord(null);
     }
-  }, [selectedChapters, isSessionStarted]);
+    
+    setIsSessionStarted(true);
+    setSessionCompleted(false);
+    setIsLoading(false);
+  }, [selectedChapters]);
 
-  useEffect(() => {
-    const wanakanaOptions = {
-      IMEMode: true,
-    };
-    if (inputRef.current) {
-      wanakana.bind(inputRef.current, wanakanaOptions);
-    }
-    return () => {
-      if (inputRef.current) {
-        wanakana.unbind(inputRef.current);
-      }
-    };
-  }, [isSessionStarted]);
-
-  const handleStartSession = () => {
+  const handleStartSessionClick = () => {
     if (selectedChapters.length > 0) {
-      setIsSessionStarted(true);
+      startNewSession();
     }
   };
-
+  
   const handleEndSession = () => {
     setIsSessionStarted(false);
     setCurrentWord(null);
-    setVocabularyList([]);
+    setRemainingWords([]);
   };
 
   const handleChapterSelection = (chapter: number) => {
@@ -107,30 +103,62 @@ export default function PracticePage() {
   };
 
   const handleNextQuestion = useCallback(() => {
-    if (vocabularyList.length > 0) {
-      const newWord = getRandomItem(vocabularyList, currentWord!);
-      setCurrentWord(newWord);
+    // Logic for incorrect answer
+    if (state.isValid === false && currentWord) {
+      incorrectWordsRef.current.push(currentWord);
+    } else if (state.isValid === true) {
+      setQuestionsAnswered(prev => prev + 1);
     }
+
+    let nextWordPool = remainingWords.filter(word => word.id !== currentWord?.id);
+
+    if (nextWordPool.length === 0) {
+      // If no words are left in the main pool, switch to the incorrect words pool
+      nextWordPool = incorrectWordsRef.current;
+      incorrectWordsRef.current = [];
+    }
+
+    if (nextWordPool.length === 0 && remainingWords.length <= 1) {
+      // All questions (including incorrect ones) have been answered correctly
+      setSessionCompleted(true);
+      return;
+    }
+
+    const nextWord = nextWordPool[Math.floor(Math.random() * nextWordPool.length)];
+    
+    setRemainingWords(nextWordPool);
+    setCurrentWord(nextWord);
+    
+    // Reset form state for the new question
     setUserAnswer('');
-    // Reset form state by resetting the form
     formRef.current?.reset();
-    // Manually reset react-dom form state
     state.isValid = null;
     state.feedback = '';
     state.isError = false;
-  }, [vocabularyList, currentWord, state]);
+
+  }, [state, currentWord, remainingWords]);
+
 
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (state.isValid !== null) {
-      // Don't clear user answer to let them see what they typed
-    } else {
-      // Focus input for the next question
+    if (inputRef.current) {
+        wanakana.bind(inputRef.current, { IMEMode: true });
+        return () => {
+          if (inputRef.current) {
+            wanakana.unbind(inputRef.current);
+          }
+        };
+    }
+  }, [isSessionStarted]);
+
+
+  useEffect(() => {
+    if (state.isValid === null) {
       inputRef.current?.focus();
     }
-  }, [state.isValid, currentWord]);
+  }, [currentWord, state.isValid]);
   
   if (!isSessionStarted) {
     return (
@@ -179,7 +207,7 @@ export default function PracticePage() {
             </DropdownMenu>
           </div>
           <Button
-            onClick={handleStartSession}
+            onClick={handleStartSessionClick}
             disabled={selectedChapters.length === 0}
             className="w-full"
             size="lg"
@@ -201,6 +229,29 @@ export default function PracticePage() {
     );
   }
   
+  if (sessionCompleted) {
+    return (
+       <div className="flex h-full min-h-[400px] flex-col items-center justify-center text-center gap-4">
+        <CheckCircle2 className="h-16 w-16 text-green-500" />
+        <h2 className="text-3xl font-bold font-headline">Sesi Selesai!</h2>
+        <p className="text-xl font-semibold">Anda menyelesaikan {totalQuestions} soal.</p>
+        <p className="text-muted-foreground">
+          Kerja bagus! Teruslah berlatih untuk menjadi lebih baik.
+        </p>
+        <div className="flex gap-4 mt-4">
+          <Button onClick={startNewSession} className="w-full">
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Latihan Lagi
+          </Button>
+          <Button onClick={handleEndSession} variant="outline" className="w-full">
+            <Settings className="mr-2 h-4 w-4" />
+            Ubah Pilihan Bab
+          </Button>
+        </div>
+       </div>
+    );
+  }
+
   if (!currentWord) {
     return (
        <div className="flex h-full min-h-[400px] flex-col items-center justify-center text-center">
@@ -215,9 +266,16 @@ export default function PracticePage() {
     );
   }
 
-
   return (
     <div className="flex flex-col items-center gap-6">
+       <div className="w-full max-w-2xl">
+         <div className="flex justify-between mb-1">
+           <span className="text-sm font-medium text-primary">Kemajuan</span>
+           <span className="text-sm font-medium text-primary">{questionsAnswered} / {totalQuestions}</span>
+         </div>
+         <Progress value={(questionsAnswered / totalQuestions) * 100} className="w-full" />
+      </div>
+
       <div className="text-center">
         <h1 className="text-4xl font-headline font-bold tracking-tight lg:text-5xl">
           Latihan Kotoba
@@ -272,28 +330,27 @@ export default function PracticePage() {
           {state.isValid === null && !state.isError && <Lightbulb className="h-4 w-4" />}
           
           <AlertTitle>
-            {state.isValid === true && 'Luar Biasa!'}
+            {state.isValid === true && 'Benar!'}
             {state.isValid === false && 'Hampir Tepat!'}
             {state.isError && 'Terjadi Kesalahan'}
             {!state.isError && state.isValid === null && 'Saran'}
-          </AlertTitle>
+          </AlerTitle>
           <AlertDescription>
             {state.feedback}
-            {state.isValid === false && ` Jawaban yang benar: ${currentWord.reading}${currentWord.reading !== currentWord.japanese ? ` (${currentWord.japanese})` : ''}`}
           </AlertDescription>
         </Alert>
       )}
 
-      {state.isValid !== null ? (
+      {state.isValid !== null && (
         <div className="flex w-full max-w-2xl justify-center gap-4">
           <Button onClick={handleNextQuestion} className="flex-1">
             Soal Berikutnya
           </Button>
           <Button onClick={handleEndSession} variant="outline" className="flex-1">
-            <Settings className="mr-2 h-4 w-4" /> Ubah Pilihan Bab
+            <Settings className="mr-2 h-4 w-4" /> Sesi Selesai
           </Button>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
