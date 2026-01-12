@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo, useActionState, useCallback } from 'react';
-import * as wanakana from 'wanakana';
 import { chapters, type VocabularyItem } from '@/lib/vocabulary';
-import { JapaneseKeyboard } from '@/components/japanese-keyboard';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
@@ -16,6 +15,7 @@ import {
   BookCheck,
   Play,
   Settings,
+  Send
 } from 'lucide-react';
 import { checkAnswer, type FormState } from './actions';
 import {
@@ -47,15 +47,8 @@ function getRandomItem(
 export default function PracticePage() {
   const [state, formAction] = useActionState(checkAnswer, initialState);
   const [currentWord, setCurrentWord] = useState<VocabularyItem | null>(null);
-  const [romajiInput, setRomajiInput] = useState('');
+  const [userAnswer, setUserAnswer] = useState('');
   
-  const hiraganaOutput = useMemo(() => {
-    if (currentWord && wanakana.isKatakana(currentWord.reading)) {
-        return wanakana.toKatakana(romajiInput);
-    }
-    return wanakana.toHiragana(romajiInput)
-  }, [romajiInput, currentWord]);
-
   const [selectedChapters, setSelectedChapters] = useState<number[]>([1]);
   const [vocabularyList, setVocabularyList] = useState<VocabularyItem[]>([]);
   const [isSessionStarted, setIsSessionStarted] = useState(false);
@@ -98,45 +91,32 @@ export default function PracticePage() {
     });
   };
 
-  const handleKeyPress = (key: string) => {
-    if (state.isValid === null) {
-      setRomajiInput((prev) => prev + key);
+  const handleNextQuestion = useCallback(() => {
+    if (vocabularyList.length > 0) {
+      const newWord = getRandomItem(vocabularyList, currentWord!);
+      setCurrentWord(newWord);
     }
-  };
-
-  const handleBackspace = () => {
-    if (state.isValid === null) {
-      setRomajiInput((prev) => prev.slice(0, -1));
-    }
-  };
-
-  const handleNextQuestion = () => {
-    const newWord = getRandomItem(vocabularyList, currentWord!);
-    setCurrentWord(newWord);
-    setRomajiInput('');
-    // Reset form state
-    const currentForm = formRef.current;
-    if (currentForm) {
-      currentForm.reset();
-    }
+    setUserAnswer('');
+    // Reset form state by resetting the form
+    formRef.current?.reset();
     // Manually reset react-dom form state
     state.isValid = null;
     state.feedback = '';
     state.isError = false;
-  };
+  }, [vocabularyList, currentWord, state]);
 
   const formRef = useRef<HTMLFormElement>(null);
-  const handleSubmitFromKeyboard = () => {
-    if (romajiInput.trim() === '') return;
-    formRef.current?.requestSubmit();
-  };
-  
+  const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (state.isValid !== null) {
-        setRomajiInput('');
+      // Don't clear user answer to let them see what they typed
+    } else {
+      // Focus input for the next question
+      inputRef.current?.focus();
     }
-  },[state.isValid])
-
+  }, [state.isValid, currentWord]);
+  
   if (!isSessionStarted) {
     return (
       <div className="flex flex-col items-center gap-8">
@@ -222,39 +202,47 @@ export default function PracticePage() {
 
 
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-6">
       <div className="text-center">
         <h1 className="text-4xl font-headline font-bold tracking-tight lg:text-5xl">
           Latihan Kotoba
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Tulis padanan kata dalam Bahasa Jepang.
+          Apa arti dari kata berikut?
         </p>
       </div>
 
-      <Card className="w-full max-w-2xl">
+      <Card className="w-full max-w-2xl text-center">
         <CardHeader>
-          <CardTitle className="text-center text-muted-foreground font-medium">
-            Apa bahasa Jepangnya...
+          <CardTitle className="text-xl font-body text-muted-foreground font-medium">
+            {currentWord.reading}
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-center text-5xl font-bold font-headline text-primary">
-            {currentWord.meaning}
+          <p className="text-6xl font-bold font-headline text-primary">
+            {currentWord.japanese}
           </p>
         </CardContent>
       </Card>
 
       <form action={formAction} ref={formRef} className="w-full max-w-2xl space-y-4">
-        <input type="hidden" name="userAnswer" value={wanakana.toHiragana(romajiInput, { passRomaji: true })} />
-        <input type="hidden" name="expectedAnswer" value={currentWord.reading} />
-        <input type="hidden" name="expectedAnswerKanji" value={currentWord.japanese} />
+        <input type="hidden" name="expectedMeaning" value={currentWord.meaning} />
 
-        <div className="w-full h-20 bg-input/50 border rounded-md flex items-center justify-center text-3xl font-body tracking-wider text-foreground">
-          {hiraganaOutput || <span className="text-muted-foreground">...</span>}
-        </div>
-         <div className="w-full h-8 text-center text-lg text-muted-foreground font-mono">
-          {romajiInput}
+        <div className="flex w-full gap-2">
+          <Input
+            ref={inputRef}
+            name="userAnswer"
+            placeholder="Ketik jawaban Anda di sini..."
+            className="flex-grow text-lg h-12"
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+            disabled={state.isValid !== null}
+            autoFocus
+          />
+          <Button type="submit" size="lg" disabled={state.isValid !== null || userAnswer.trim() === ''}>
+            <Send className="h-5 w-5" />
+            <span className="sr-only">Kirim</span>
+          </Button>
         </div>
       </form>
 
@@ -278,7 +266,7 @@ export default function PracticePage() {
           </AlertTitle>
           <AlertDescription>
             {state.feedback}
-            {state.isValid === false && ` Jawaban yang benar: ${currentWord.reading} ${currentWord.japanese ? `(${currentWord.japanese})` : ''}`}
+            {state.isValid === false && ` Jawaban yang benar: ${currentWord.meaning}`}
           </AlertDescription>
         </Alert>
       )}
@@ -292,13 +280,7 @@ export default function PracticePage() {
             <Settings className="mr-2 h-4 w-4" /> Ubah Pilihan Bab
           </Button>
         </div>
-      ) : (
-        <JapaneseKeyboard
-          onKeyPress={handleKeyPress}
-          onBackspace={handleBackspace}
-          onSubmit={handleSubmitFromKeyboard}
-        />
-      )}
+      ) : null}
     </div>
   );
 }

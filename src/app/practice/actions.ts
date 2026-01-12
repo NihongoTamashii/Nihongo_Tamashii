@@ -1,12 +1,10 @@
 'use server';
 
 import { z } from 'zod';
-import * as wanakana from 'wanakana';
 
 const formSchema = z.object({
   userAnswer: z.string().trim(),
-  expectedAnswer: z.string(),
-  expectedAnswerKanji: z.string(),
+  expectedMeaning: z.string(),
 });
 
 export type FormState = {
@@ -21,8 +19,7 @@ export async function checkAnswer(
 ): Promise<FormState> {
   const validatedFields = formSchema.safeParse({
     userAnswer: formData.get('userAnswer'),
-    expectedAnswer: formData.get('expectedAnswer'),
-    expectedAnswerKanji: formData.get('expectedAnswerKanji'),
+    expectedMeaning: formData.get('expectedMeaning'),
   });
 
   if (!validatedFields.success) {
@@ -33,7 +30,9 @@ export async function checkAnswer(
     };
   }
 
-  if (validatedFields.data.userAnswer === '') {
+  const { userAnswer, expectedMeaning } = validatedFields.data;
+
+  if (userAnswer === '') {
     return {
       isValid: null,
       feedback: 'Jawaban tidak boleh kosong.',
@@ -41,28 +40,8 @@ export async function checkAnswer(
     };
   }
 
-  const { userAnswer: rawUserAnswer, expectedAnswer, expectedAnswerKanji } =
-    validatedFields.data;
-    
-  const cleanExpectedAnswer = expectedAnswer.startsWith('～')
-  ? expectedAnswer.substring(1)
-  : expectedAnswer;
-  
-  const cleanExpectedAnswerKanji =
-  expectedAnswerKanji && expectedAnswerKanji.startsWith('～')
-  ? expectedAnswerKanji.substring(1)
-  : expectedAnswerKanji;
-
-  const isKatakanaExpected = wanakana.isKatakana(cleanExpectedAnswer);
-  const userAnswer = isKatakanaExpected
-    ? wanakana.toKatakana(rawUserAnswer, { passRomaji: true })
-    : wanakana.toHiragana(rawUserAnswer, { passRomaji: true });
-
-  const isCorrectAsReading = userAnswer === cleanExpectedAnswer;
-  const hasDistinctKanji = cleanExpectedAnswerKanji && cleanExpectedAnswerKanji !== cleanExpectedAnswer;
-  const isCorrectAsKanji = hasDistinctKanji && userAnswer === cleanExpectedAnswerKanji;
-
-  const isCorrect = isCorrectAsReading || isCorrectAsKanji;
+  // Case-insensitive comparison
+  const isCorrect = userAnswer.toLowerCase() === expectedMeaning.toLowerCase();
 
   if (isCorrect) {
     return {
