@@ -334,7 +334,7 @@ export default function PracticePage() {
             {state.isValid === false && 'Hampir Tepat!'}
             {state.isError && 'Terjadi Kesalahan'}
             {!state.isError && state.isValid === null && 'Saran'}
-          </AlerTitle>
+          </AlertTitle>
           <AlertDescription>
             {state.feedback}
           </AlertDescription>
