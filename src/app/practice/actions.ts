@@ -1,10 +1,12 @@
 'use server';
 
 import { z } from 'zod';
+import * as wanakana from 'wanakana';
 
 const formSchema = z.object({
   userAnswer: z.string().trim(),
-  expectedMeaning: z.string(),
+  expectedReading: z.string(),
+  expectedJapanese: z.string(),
 });
 
 export type FormState = {
@@ -19,7 +21,8 @@ export async function checkAnswer(
 ): Promise<FormState> {
   const validatedFields = formSchema.safeParse({
     userAnswer: formData.get('userAnswer'),
-    expectedMeaning: formData.get('expectedMeaning'),
+    expectedReading: formData.get('expectedReading'),
+    expectedJapanese: formData.get('expectedJapanese'),
   });
 
   if (!validatedFields.success) {
@@ -30,7 +33,7 @@ export async function checkAnswer(
     };
   }
 
-  const { userAnswer, expectedMeaning } = validatedFields.data;
+  const { userAnswer, expectedReading, expectedJapanese } = validatedFields.data;
 
   if (userAnswer === '') {
     return {
@@ -40,8 +43,22 @@ export async function checkAnswer(
     };
   }
 
-  // Case-insensitive comparison
-  const isCorrect = userAnswer.toLowerCase() === expectedMeaning.toLowerCase();
+  // Convert romaji to kana, just in case user types in romaji
+  const userAnswerAsKana = wanakana.toKana(userAnswer.toLowerCase());
+
+  // Clean the expected answers by removing the '~' prefix if it exists
+  const cleanExpectedReading = expectedReading.startsWith('～')
+    ? expectedReading.substring(1)
+    : expectedReading;
+  const cleanExpectedJapanese = expectedJapanese.startsWith('～')
+    ? expectedJapanese.substring(1)
+    : expectedJapanese;
+
+  // The answer is correct if the user's input (converted to kana) matches either
+  // the reading (hiragana/katakana) or the Japanese form (which might include kanji).
+  const isCorrect =
+    userAnswerAsKana === cleanExpectedReading ||
+    userAnswerAsKana === cleanExpectedJapanese;
 
   if (isCorrect) {
     return {

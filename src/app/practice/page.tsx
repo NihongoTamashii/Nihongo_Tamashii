@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo, useActionState, useCallback } from 'react';
+import { useState, useEffect, useRef, useActionState, useCallback } from 'react';
 import { chapters, type VocabularyItem } from '@/lib/vocabulary';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,6 +26,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import * as wanakana from 'wanakana';
 
 const initialState: FormState = {
   isValid: null,
@@ -69,6 +70,20 @@ export default function PracticePage() {
       setIsLoading(false);
     }
   }, [selectedChapters, isSessionStarted]);
+
+  useEffect(() => {
+    const wanakanaOptions = {
+      IMEMode: true,
+    };
+    if (inputRef.current) {
+      wanakana.bind(inputRef.current, wanakanaOptions);
+    }
+    return () => {
+      if (inputRef.current) {
+        wanakana.unbind(inputRef.current);
+      }
+    };
+  }, [isSessionStarted]);
 
   const handleStartSession = () => {
     if (selectedChapters.length > 0) {
@@ -208,36 +223,34 @@ export default function PracticePage() {
           Latihan Kotoba
         </h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Apa arti dari kata berikut?
+          Apa bahasa Jepang dari kata berikut?
         </p>
       </div>
 
       <Card className="w-full max-w-2xl text-center">
         <CardHeader>
-          <CardTitle className="text-xl font-body text-muted-foreground font-medium">
-            {currentWord.reading}
+          <CardTitle className="text-6xl font-bold font-headline text-primary">
+            {currentWord.meaning}
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-6xl font-bold font-headline text-primary">
-            {currentWord.japanese}
-          </p>
-        </CardContent>
       </Card>
 
       <form action={formAction} ref={formRef} className="w-full max-w-2xl space-y-4">
-        <input type="hidden" name="expectedMeaning" value={currentWord.meaning} />
+        <input type="hidden" name="expectedReading" value={currentWord.reading} />
+        <input type="hidden" name="expectedJapanese" value={currentWord.japanese} />
 
         <div className="flex w-full gap-2">
           <Input
             ref={inputRef}
             name="userAnswer"
-            placeholder="Ketik jawaban Anda di sini..."
+            placeholder="Ketik jawaban dalam hiragana/katakana..."
             className="flex-grow text-lg h-12"
             value={userAnswer}
             onChange={(e) => setUserAnswer(e.target.value)}
             disabled={state.isValid !== null}
             autoFocus
+            lang="ja"
+            autoComplete="off"
           />
           <Button type="submit" size="lg" disabled={state.isValid !== null || userAnswer.trim() === ''}>
             <Send className="h-5 w-5" />
@@ -266,7 +279,7 @@ export default function PracticePage() {
           </AlertTitle>
           <AlertDescription>
             {state.feedback}
-            {state.isValid === false && ` Jawaban yang benar: ${currentWord.meaning}`}
+            {state.isValid === false && ` Jawaban yang benar: ${currentWord.reading}${currentWord.reading !== currentWord.japanese ? ` (${currentWord.japanese})` : ''}`}
           </AlertDescription>
         </Alert>
       )}
