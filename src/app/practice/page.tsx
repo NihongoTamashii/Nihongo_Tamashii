@@ -17,18 +17,12 @@ import {
   Play,
   Settings,
   Send,
-  RotateCcw
+  RotateCcw,
+  CheckCircle,
 } from 'lucide-react';
 import { checkAnswer, type FormState } from './actions';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import * as wanakana from 'wanakana';
+import { cn } from '@/lib/utils';
 
 const initialState: FormState = {
   isValid: null,
@@ -163,48 +157,46 @@ export default function PracticePage() {
   if (!isSessionStarted) {
     return (
       <div className="flex flex-col items-center gap-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-headline font-bold tracking-tight lg:text-5xl">
-          Latihan Kotoba
-        </h1>
-        <p className="mt-2 text-lg text-muted-foreground">
-          Pilih bab yang ingin Anda latih untuk memulai sesi.
-        </p>
-      </div>
+        <div className="text-center">
+          <h1 className="text-4xl font-headline font-bold tracking-tight lg:text-5xl">
+            Latihan Kotoba
+          </h1>
+          <p className="mt-2 text-lg text-muted-foreground">
+            Pilih bab yang ingin Anda latih untuk memulai sesi.
+          </p>
+        </div>
 
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BookCheck className="h-6 w-6 text-primary" />
-            <span>Pengaturan Sesi Latihan</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-6">
-          <div className="flex w-full items-center justify-center gap-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full">
-                  <BookCheck className="mr-2 h-4 w-4" />
-                  Pilih Bab ({selectedChapters.length})
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64 max-h-80 overflow-y-auto">
-                <DropdownMenuLabel>Pilih Bab untuk Dilatih</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {chapters
-                  .filter((chapter) => chapter.words.length > 0)
-                  .map((chapter) => (
-                    <DropdownMenuCheckboxItem
-                      key={chapter.chapter}
-                      checked={selectedChapters.includes(chapter.chapter)}
-                      onSelect={(e) => e.preventDefault()}
-                      onClick={() => handleChapterSelection(chapter.chapter)}
-                    >
-                      Bab {chapter.chapter} ({chapter.words.length} Kosakata)
-                    </DropdownMenuCheckboxItem>
-                  ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+        <div className="w-full max-w-4xl">
+          <h2 className="mb-4 text-center text-xl font-headline font-semibold">Pilih Bab</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
+            {chapters
+              .filter((chapter) => chapter.words.length > 0)
+              .map((chapter) => (
+                <Card
+                  key={chapter.chapter}
+                  onClick={() => handleChapterSelection(chapter.chapter)}
+                  className={cn(
+                    'cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1 relative',
+                    selectedChapters.includes(chapter.chapter)
+                      ? 'border-primary ring-2 ring-primary shadow-lg'
+                      : 'border-border'
+                  )}
+                >
+                  <CardContent className="p-4 text-center">
+                    <h3 className="font-bold font-headline text-lg">
+                      Bab {chapter.chapter}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      ({chapter.words.length} kosakata)
+                    </p>
+                    {selectedChapters.includes(chapter.chapter) && (
+                      <div className="absolute top-2 right-2 bg-primary text-primary-foreground rounded-full p-1">
+                        <CheckCircle className="h-4 w-4" />
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
           </div>
           <Button
             onClick={handleStartSessionClick}
@@ -213,11 +205,10 @@ export default function PracticePage() {
             size="lg"
           >
             <Play className="mr-2 h-5 w-5" />
-            Mulai Latihan
+            Mulai Latihan ({selectedChapters.length} Bab)
           </Button>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+      </div>
     );
   }
 

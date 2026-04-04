@@ -12,16 +12,10 @@ import {
   Loader2,
   Play,
   Settings,
+  CheckCircle,
 } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 export default function LearnPage() {
   const [selectedChapters, setSelectedChapters] = useState<number[]>([1]);
@@ -170,51 +164,48 @@ export default function LearnPage() {
         </p>
       </div>
 
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BookCheck className="h-6 w-6 text-primary" />
-            <span>Pengaturan Sesi</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-6">
-          <div className="flex w-full items-center justify-center gap-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full">
-                  <BookCheck className="mr-2 h-4 w-4" />
-                  Pilih Bab ({selectedChapters.length})
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64 max-h-80 overflow-y-auto">
-                <DropdownMenuLabel>Pilih Bab untuk Dipelajari</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {chapters
-                  .filter((chapter) => chapter.words.length > 0)
-                  .map((chapter) => (
-                    <DropdownMenuCheckboxItem
-                      key={chapter.chapter}
-                      checked={selectedChapters.includes(chapter.chapter)}
-                      onSelect={(e) => e.preventDefault()}
-                      onClick={() => handleChapterSelection(chapter.chapter)}
-                    >
-                      Bab {chapter.chapter} ({chapter.words.length} Kosakata)
-                    </DropdownMenuCheckboxItem>
-                  ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          <Button
-            onClick={handleStartSession}
-            disabled={selectedChapters.length === 0}
-            className="w-full"
-            size="lg"
-          >
-            <Play className="mr-2 h-5 w-5" />
-            Mulai Belajar
-          </Button>
-        </CardContent>
-      </Card>
+      <div className="w-full max-w-4xl">
+        <h2 className="mb-4 text-center text-xl font-headline font-semibold">Pilih Bab</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
+          {chapters
+            .filter((chapter) => chapter.words.length > 0)
+            .map((chapter) => (
+              <Card
+                key={chapter.chapter}
+                onClick={() => handleChapterSelection(chapter.chapter)}
+                className={cn(
+                  'cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1 relative',
+                  selectedChapters.includes(chapter.chapter)
+                    ? 'border-primary ring-2 ring-primary shadow-lg'
+                    : 'border-border'
+                )}
+              >
+                <CardContent className="p-4 text-center">
+                  <h3 className="font-bold font-headline text-lg">
+                    Bab {chapter.chapter}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    ({chapter.words.length} kosakata)
+                  </p>
+                  {selectedChapters.includes(chapter.chapter) && (
+                    <div className="absolute top-2 right-2 bg-primary text-primary-foreground rounded-full p-1">
+                      <CheckCircle className="h-4 w-4" />
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+        </div>
+        <Button
+          onClick={handleStartSession}
+          disabled={selectedChapters.length === 0}
+          className="w-full"
+          size="lg"
+        >
+          <Play className="mr-2 h-5 w-5" />
+          Mulai Belajar ({selectedChapters.length} Bab)
+        </Button>
+      </div>
     </div>
   );
 }
